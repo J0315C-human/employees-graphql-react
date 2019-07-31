@@ -14,16 +14,20 @@ const typeDefs = gql`
   }
 
   type EmployeeDetails {
+    age: Float
+    imageUrl: String
+  }
+
+  type EmployeeContact {
     email: String
     phone: String
     username: String
-    age: Float
-    imageUrl: String
   }
 
   type Employee {
     name: String
     location: EmployeeLocation
+    contact: EmployeeContact
     details: EmployeeDetails
   }
 `;
