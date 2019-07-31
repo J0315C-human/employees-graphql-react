@@ -6,7 +6,7 @@ class EmployeeAPI extends RESTDataSource {
     this.baseURL = 'https://randomuser.me/api/';
   }
 
-  employeeReducer(emp) {
+  employeeReducer(emp, order) {
     return {
       name: emp.name.first + ' ' + emp.name.last,
       location: {
@@ -19,7 +19,8 @@ class EmployeeAPI extends RESTDataSource {
         email: emp.email,
         phone: emp.phone,
         username: emp.login.username,
-        age: emp.dob.age
+        age: emp.dob.age,
+        imageUrl: emp.picture.large,
       }
     }
   }

@@ -18,6 +18,7 @@ const typeDefs = gql`
     phone: String
     username: String
     age: Float
+    imageUrl: String
   }
 
   type Employee {
