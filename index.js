@@ -1,17 +1,14 @@
-const { ApolloServer, gql } = require("apollo-server");
-const fetch = require("node-fetch");
-
-// Construct a schema, using GraphQL schema language
-const typeDefs = `
-`;
-
-// Provide resolver functions for your schema fields
-const resolvers = {
-};
+const { ApolloServer } = require("apollo-server");
+const typeDefs = require('./schema.js');
+const EmployeeAPI = require('./employeeAPI.js');
+const resolvers = require('./resolvers.js');
 
 const server = new ApolloServer({
   typeDefs,
-  resolvers
+  resolvers,
+  dataSources: () => ({
+    employeeAPI: new EmployeeAPI,
+  })
 });
 
 server.listen().then(({ url }) => {
