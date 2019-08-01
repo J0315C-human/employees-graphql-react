@@ -3,18 +3,25 @@ import ReactDOM from 'react-dom';
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 import { ApolloProvider } from 'react-apollo';
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
-import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
+import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import client from './apollo/client';
+import blueGrey from '@material-ui/core/colors/blueGrey';
+import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 
-const theme = createMuiTheme({});
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: blueGrey[600],
+    },
+  },
+});
 
 ReactDOM.render(
-  <MuiThemeProvider theme={theme}>
+  <ThemeProvider theme={theme}>
     <ApolloProvider client={client}>
       <App />
     </ApolloProvider>
-  </MuiThemeProvider>,
+  </ThemeProvider>,
   document.getElementById('root') as HTMLElement,
 );
 registerServiceWorker();
