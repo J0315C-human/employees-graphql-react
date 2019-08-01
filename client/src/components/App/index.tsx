@@ -2,10 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Query } from 'react-apollo';
 import { GET_EMPLOYEES } from '../../apollo/queries';
-
-interface Employee {
-  name: string;
-}
+import CollectionEmployee from '../CollectionEmployee';
+import { Employee } from '../../typings/api';
 
 class App extends React.Component {
   public render() {
@@ -22,7 +20,7 @@ class App extends React.Component {
                   return <div>{error}</div>;
                 }
                 if (data && data.employees) {
-                  return data.employees.map((employee, i) => <div key={i}>{employee.name}</div>);
+                  return <CollectionEmployee employees={data.employees} />;
                 } else return <div>NO DATA!</div>;
               }}
             </Query>
