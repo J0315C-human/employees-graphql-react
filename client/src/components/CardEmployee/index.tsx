@@ -7,14 +7,14 @@ import { Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import CardMedia from '@material-ui/core/CardMedia';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 interface CardEmployeeProps {
   employee: Employee;
 }
 
-const useStyles = makeStyles((theme: Theme) => {
-  console.log(theme.transitions.duration);
-  return createStyles({
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
     root: {
       position: 'relative',
       display: 'flex',
@@ -50,8 +50,8 @@ const useStyles = makeStyles((theme: Theme) => {
       height: '45%',
       transition: 'opacity 0.1s linear',
     },
-  });
-});
+  }),
+);
 
 const CardEmployee: React.FunctionComponent<CardEmployeeProps> = props => {
   const styles = useStyles();
@@ -60,25 +60,27 @@ const CardEmployee: React.FunctionComponent<CardEmployeeProps> = props => {
   const { name, id, details } = props.employee;
 
   return (
-    <Card className={styles.root} onMouseEnter={toggleRaised} onMouseLeave={toggleRaised} raised={raised}>
-      <div
-        className={styles.blurredBackground}
-        style={{
-          backgroundImage: `url(${details.imageUrl})`,
-          opacity: raised ? 0.6 : 0.3,
-        }}
-      ></div>
-      <CardMedia
-        component="img"
-        src={details.imageUrl}
-        className={styles.img}
-        style={{ transform: raised ? 'scale(1.1)' : 'scale(1)' }}
-      />
-      <Typography className={styles.text}>{name}</Typography>
-      <Typography className={styles.text} color="textSecondary">
-        {id}
-      </Typography>
-    </Card>
+    <Link to={`../employees/${id}`}>
+      <Card className={styles.root} onMouseEnter={toggleRaised} onMouseLeave={toggleRaised} raised={raised}>
+        <div
+          className={styles.blurredBackground}
+          style={{
+            backgroundImage: `url(${details.imageUrl})`,
+            opacity: raised ? 0.6 : 0.3,
+          }}
+        ></div>
+        <CardMedia
+          component="img"
+          src={details.imageUrl}
+          className={styles.img}
+          style={{ transform: raised ? 'scale(1.1)' : 'scale(1)' }}
+        />
+        <Typography className={styles.text}>{name}</Typography>
+        <Typography className={styles.text} color="textSecondary">
+          {id}
+        </Typography>
+      </Card>
+    </Link>
   );
 };
 
