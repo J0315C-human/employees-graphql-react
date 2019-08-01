@@ -1,22 +1,22 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch, RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps, Route } from 'react-router-dom';
+import SwitchTransition from '../SwitchTransition';
 import RouteEmployees from '../RouteEmployees';
+import RouteEmployee from '../RouteEmployee';
 
-class App extends React.Component {
+const animationProps = {
+  from: { opacity: 0, transform: 'translate3d(0,100px,0)' },
+  enter: { opacity: 1, transform: 'translate3d(0,0px,0)' },
+  leave: { opacity: 0, transform: 'translate3d(0,100px,0)' },
+};
+
+class App extends React.Component<RouteComponentProps> {
   public render() {
     return (
-      <Router>
-        <Switch>
-          <Route
-            path="/employees/:id"
-            render={(props: RouteComponentProps<{ id: string }>) => {
-              const id = props.match.params.id;
-              return <div>EMPLOYEE # {id}</div>;
-            }}
-          />
-          <Route path="/employees" component={RouteEmployees} />
-        </Switch>
-      </Router>
+      <SwitchTransition location={this.props.location} animationProps={animationProps}>
+        <Route path="/employees/:id" component={RouteEmployee} />
+        <Route path="/employees" component={RouteEmployees} />
+      </SwitchTransition>
     );
   }
 }

@@ -10,7 +10,7 @@ interface CollectionEmployeeProps {
 }
 
 const CollectionEmployee: React.FunctionComponent<CollectionEmployeeProps> = props => {
-  const [items, set] = useState(props.employees);
+  const [items] = useState(props.employees);
 
   const transitions = useTransition(items, item => item.id, {
     from: { transform: 'translate3d(0,-20px,0)', opacity: 0 },
