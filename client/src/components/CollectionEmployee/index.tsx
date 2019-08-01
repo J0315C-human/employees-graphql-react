@@ -1,6 +1,7 @@
 import * as React from 'react';
 import CardEmployee from '../CardEmployee';
 import { Employee } from '../../typings/api';
+import { Grid } from '@material-ui/core';
 
 interface CollectionEmployeeProps {
   employees: Employee[];
@@ -8,11 +9,11 @@ interface CollectionEmployeeProps {
 
 const CollectionEmployee: React.FunctionComponent<CollectionEmployeeProps> = props => {
   return (
-    <div style={{ display: 'flex', flexFlow: 'row wrap' }}>
+    <Grid container justify="center">
       {props.employees.map((employee, i) => (
         <CardEmployee key={i} employee={employee} />
       ))}
-    </div>
+    </Grid>
   );
 };
 
