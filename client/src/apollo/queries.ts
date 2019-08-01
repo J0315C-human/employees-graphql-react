@@ -4,6 +4,7 @@ export const GET_EMPLOYEES = gql`
   query employeeList {
     employees {
       name
+      id
       location {
         street
         city

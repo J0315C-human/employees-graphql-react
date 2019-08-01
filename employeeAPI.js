@@ -1,9 +1,12 @@
 const { RESTDataSource } = require('apollo-datasource-rest');
+const data = require('./data.js');
 
 class EmployeeAPI extends RESTDataSource {
   constructor() {
     super();
     this.baseURL = 'https://randomuser.me/api/';
+    // add indices as 'ids'
+    this.employees = data.map((emp, i) => ({ ...emp, id: `${i}` }));
   }
 
   employeeReducer(emp, order) {
@@ -25,13 +28,20 @@ class EmployeeAPI extends RESTDataSource {
     }
   }
 
-  async getAllEmployees() {
-    const response = await this.get('', { results: 10, seed: 'abc' });
+  async real_getAllEmployees() {
+    const response = await this.get('', { results: 100, seed: 'abc' });
     return response.results && Array.isArray(response.results)
     ? response.results.map(emp => this.employeeReducer(emp))
     : [];
   }
 
+  getAllEmployees() {
+    return this.employees;
+  }
+
+  getEmployeeById( id ) {
+    return this.employees[parseInt(id)];
+  }
 }
 
 module.exports = EmployeeAPI;
