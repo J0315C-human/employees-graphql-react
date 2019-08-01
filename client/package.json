@@ -7,8 +7,8 @@
   },
   "proxy": "http://0.0.0.0:8000/",
   "dependencies": {
-    "@material-ui/core": "^1.4.3",
-    "@material-ui/icons": "^2.0.1",
+    "@material-ui/core": "^4.3.0",
+    "@material-ui/icons": "^4.2.1",
     "apollo-cache-inmemory": "^1.6.2",
     "apollo-client": "^2.6.3",
     "apollo-link-http": "^1.5.15",
@@ -18,7 +18,6 @@
     "react": "^16.8.3",
     "react-apollo": "^2.5.8",
     "react-dom": "^16.8.3",
-    "react-jss": "^8.6.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^2.1.5",
     "react-select": "^2.1.1"
