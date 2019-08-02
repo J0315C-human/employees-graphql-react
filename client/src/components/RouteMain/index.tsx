@@ -10,7 +10,7 @@ const animationProps = {
   leave: { opacity: 0, transform: 'translate3d(0,100px,0)' },
 };
 
-class App extends React.Component<RouteComponentProps> {
+class RouteMain extends React.Component<RouteComponentProps> {
   public render() {
     return (
       <SwitchTransition location={this.props.location} animationProps={animationProps}>
@@ -21,4 +21,4 @@ class App extends React.Component<RouteComponentProps> {
   }
 }
 
-export default App;
+export default RouteMain;
