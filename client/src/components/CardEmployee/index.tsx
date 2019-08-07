@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import CardMedia from '@material-ui/core/CardMedia';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import styleProps from '../../constants/styleProps';
 
 interface CardEmployeeProps {
   employee: Employee;
@@ -43,12 +44,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     blurredBackground: {
       position: 'absolute',
-      filter: 'blur(4px)',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
       width: '100%',
       height: '45%',
       transition: 'opacity 0.1s linear',
+      ...styleProps.blurredHeroImage,
     },
   }),
 );
