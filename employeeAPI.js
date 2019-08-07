@@ -35,11 +35,12 @@ class EmployeeAPI extends RESTDataSource {
     : [];
   }
 
-  getAllEmployees() {
-    return this.employees;
+  getAllEmployees( { offset, limit }) {
+    const startIdx = offset || 0;
+    return this.employees.slice(startIdx, startIdx + limit);
   }
 
-  getEmployeeById( id ) {
+  getEmployeeById( {id} ) {
     return this.employees[parseInt(id)];
   }
 }

@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-const employeeStructure = `
+const employeeContents = `
 name
 id
 location {
@@ -20,17 +20,26 @@ details {
 }`;
 
 export const GET_EMPLOYEES = gql`
-  query EmployeeList {
-    employees {
-      ${employeeStructure}
+  query EmployeeList ($offset: Int, $limit: Int) {
+    employees (offset: $offset, limit: $limit) {
+      ${employeeContents}
     }
   }
 `;
 
+export interface GetEmployeesVars {
+  offset?: number;
+  limit?: number;
+}
+
 export const GET_EMPLOYEE = gql`
   query Employee($id: ID!) {
     employee(id: $id) {
-      ${employeeStructure}
+      ${employeeContents}
     }
   }
 `;
+
+export interface GetEmployeeVars {
+  id: string;
+}

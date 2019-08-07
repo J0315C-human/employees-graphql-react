@@ -2,7 +2,7 @@
 // Resolvers for our queries
 module.exports = {
   Query: {
-    employees: (parent, args, { dataSources }) => dataSources.employeeAPI.getAllEmployees(),
-    employee: (parent, args, { dataSources }) => dataSources.employeeAPI.getEmployeeById(args.id),
+    employees: (parent, args, { dataSources }) => dataSources.employeeAPI.getAllEmployees(args),
+    employee: (parent, args, { dataSources }) => dataSources.employeeAPI.getEmployeeById(args),
   }
 }
