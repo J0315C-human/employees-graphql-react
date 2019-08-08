@@ -4,23 +4,46 @@ import { Query } from 'react-apollo';
 import { GET_EMPLOYEES, GetEmployeesVars } from '../../apollo/queries';
 import CollectionEmployee from '../CollectionEmployee';
 import { Employee } from '../../typings/api';
+import InputSearch from '../InputSearch';
+import { Container } from '@material-ui/core';
+import styleProps from '../../constants/styleProps';
 
-export default class RouteEmployees extends React.Component<RouteComponentProps<{}>> {
+interface RouteEmployeesState {
+  searchQuery: string;
+}
+
+export default class RouteEmployees extends React.Component<RouteComponentProps<{}>, RouteEmployeesState> {
+  state = {
+    searchQuery: '',
+  };
+
+  onSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ searchQuery: e.target.value });
+  };
+
   public render() {
     return (
-      <Query<{ employees: Employee[] }, GetEmployeesVars> query={GET_EMPLOYEES} variables={{ limit: 20, offset: 0 }}>
-        {({ data, loading, error }) => {
-          if (loading) {
-            return <div>LOADING...</div>;
-          }
-          if (error) {
-            return <div>{error}</div>;
-          }
-          if (data && data.employees) {
-            return <CollectionEmployee employees={data.employees} />;
-          } else return <div>NO DATA!</div>;
-        }}
-      </Query>
+      <>
+        <Container style={{ ...styleProps.rowWrapCentered, width: '100vw' }}>
+          <InputSearch onChange={this.onSearchChange} />
+          <Query<{ employees: Employee[] }, GetEmployeesVars>
+            query={GET_EMPLOYEES}
+            variables={{ limit: 20, offset: 0 }}
+          >
+            {({ data, loading, error }) => {
+              if (loading) {
+                return <div>LOADING...</div>;
+              }
+              if (error) {
+                return <div>{error}</div>;
+              }
+              if (data && data.employees) {
+                return <CollectionEmployee employees={data.employees} searchQuery={this.state.searchQuery} />;
+              } else return <div>NO DATA!</div>;
+            }}
+          </Query>
+        </Container>
+      </>
     );
   }
 }
