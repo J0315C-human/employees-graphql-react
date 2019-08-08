@@ -6,11 +6,10 @@ import { useTransition, animated } from 'react-spring';
 
 interface CollectionEmployeeProps {
   employees: Employee[];
-  searchQuery: string;
 }
 
 const CollectionEmployee: React.FunctionComponent<CollectionEmployeeProps> = props => {
-  const { employees, searchQuery } = props;
+  const { employees } = props;
   const transitions = useTransition(employees, employee => employee.id, {
     from: { transform: 'translate3d(0,-20px,0)', opacity: 0 },
     enter: { transform: 'translate3d(0,0px,0)', opacity: 1 },
@@ -22,7 +21,7 @@ const CollectionEmployee: React.FunctionComponent<CollectionEmployeeProps> = pro
     <Grid container justify="center">
       {transitions.map(({ item, props, key }) => (
         <animated.div key={key} style={props}>
-          {item.name.includes(searchQuery) ? <CardEmployee employee={item} /> : null}
+          <CardEmployee employee={item} />
         </animated.div>
       ))}
     </Grid>

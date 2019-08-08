@@ -100,9 +100,11 @@ class EmployeeAPI extends RESTDataSource {
   //   : [];
   // }
 
-  getAllEmployees( { offset, limit }) {
+  getAllEmployees( { offset, limit, search }) {
     const startIdx = offset || 0;
-    return this.employees.slice(startIdx, startIdx + limit).map(this.employeeReducer);
+    const query = search ? search.trim().toLowerCase() : '';
+    const filtered = this.employees.filter(emp => emp.name.toLowerCase().includes(query))
+    return filtered.slice(startIdx, startIdx + limit).map(this.employeeReducer);
   }
 
   getEmployeeById( { id } ) {

@@ -28,7 +28,7 @@ export default class RouteEmployees extends React.Component<RouteComponentProps<
           <InputSearch onChange={this.onSearchChange} />
           <Query<{ employees: Employee[] }, GetEmployeesVars>
             query={GET_EMPLOYEES}
-            variables={{ limit: 20, offset: 0 }}
+            variables={{ limit: 20, offset: 0, search: this.state.searchQuery }}
           >
             {({ data, loading, error }) => {
               if (loading) {
@@ -38,7 +38,7 @@ export default class RouteEmployees extends React.Component<RouteComponentProps<
                 return <div>{error}</div>;
               }
               if (data && data.employees) {
-                return <CollectionEmployee employees={data.employees} searchQuery={this.state.searchQuery} />;
+                return <CollectionEmployee employees={data.employees} />;
               } else return <div>NO DATA!</div>;
             }}
           </Query>

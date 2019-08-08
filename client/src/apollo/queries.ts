@@ -20,8 +20,8 @@ details {
 }`;
 
 export const GET_EMPLOYEES = gql`
-  query EmployeeList ($offset: Int, $limit: Int) {
-    employees (offset: $offset, limit: $limit) {
+  query EmployeeList ($offset: Int, $limit: Int, $search: String) {
+    employees (offset: $offset, limit: $limit, search: $search) {
       ${employeeContents}
     }
   }
@@ -30,6 +30,7 @@ export const GET_EMPLOYEES = gql`
 export interface GetEmployeesVars {
   offset?: number;
   limit?: number;
+  search?: string;
 }
 
 export const GET_EMPLOYEE = gql`
