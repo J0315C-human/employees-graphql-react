@@ -1,11 +1,10 @@
 import { EmployeeWithCalls } from '../../typings/api';
+import { getDisplayDuration } from '../../utils';
 
 export const getEmployeeStats = (emp: EmployeeWithCalls) => {
   const allCallsLength = emp.calls.reduce((prev, cur) => cur.duration + prev, 0);
   const avgCallSecs = Math.round(allCallsLength / emp.calls.length);
-  const minutes = Math.floor(avgCallSecs / 60);
-  const seconds = avgCallSecs - minutes * 60;
-  const avgCallLength = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+  const avgCallLength = getDisplayDuration(avgCallSecs);
 
   const totalResolved = emp.calls.filter(call => call.status === 'resolved').length;
 

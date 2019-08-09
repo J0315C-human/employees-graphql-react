@@ -6,6 +6,8 @@ import { EmployeeWithCalls } from '../../typings/api';
 import { Container, createStyles, makeStyles, Theme, Avatar, Typography, Card } from '@material-ui/core';
 import styleProps from '../../constants/styleProps';
 import EmployeeDetails from '../EmployeeDetails';
+import TitleSubsection from '../TitleSubsection';
+import CardCall from '../CardCall';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -69,7 +71,7 @@ const RouteEmployee: React.FunctionComponent<RouteComponentProps<{ id: string }>
         if (data && data.employee) {
           const emp = data.employee;
           return (
-            <Container>
+            <Container style={{ marginBottom: 30 }}>
               <div className={styles.heroContainer}>
                 <div className={styles.hero} style={{ backgroundImage: `url(${emp.details.imageUrl})` }} />
                 <div className={styles.headerContainer}>
@@ -82,6 +84,10 @@ const RouteEmployee: React.FunctionComponent<RouteComponentProps<{ id: string }>
               <Card className={styles.detailsContainer}>
                 <EmployeeDetails employee={emp} />
               </Card>
+              <TitleSubsection>Recent Calls</TitleSubsection>
+              {emp.calls.map((call, i) => (
+                <CardCall call={call} key={i} />
+              ))}
             </Container>
           );
         } else return <div>NO DATA!</div>;

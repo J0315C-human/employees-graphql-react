@@ -5,12 +5,12 @@ import styleProps from '../../constants/styleProps';
 interface InfoDetailProps {
   title: React.ReactNode;
   value: React.ReactNode;
+  style?: React.CSSProperties;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     outer: {
-      color: theme.palette.primary.main,
       ...styleProps.columnCentered,
       justifyContent: 'space-around',
       margin: `0px ${theme.spacing(3)}`,
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const InfoDetail: React.FunctionComponent<InfoDetailProps> = props => {
   const styles = useStyles();
   return (
-    <div className={styles.outer}>
+    <div className={styles.outer} style={props.style}>
       <Typography variant="body2">{props.title}</Typography>
       <Typography variant="h6">{props.value}</Typography>
     </div>
