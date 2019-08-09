@@ -10,6 +10,12 @@ const styleProps = {
     justifyContent: 'center',
     alignItems: 'center',
   },
+  columnCentered: {
+    display: 'flex',
+    flexFlow: 'column nowrap',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 };
 
 export default styleProps;

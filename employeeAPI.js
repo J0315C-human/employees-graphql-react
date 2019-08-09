@@ -53,7 +53,7 @@ class EmployeeAPI extends RESTDataSource {
 
   getEmployeeCalls(employeeId) {
     this.setSeed(employeeId);
-    const numCalls = faker.random.number(10) + 2;
+    const numCalls = faker.random.number(20) + 2;
     return new Array(numCalls).fill(null).map((_, i) => 
       this.getEmployeeCall(employeeId, i)
     )
@@ -63,13 +63,15 @@ class EmployeeAPI extends RESTDataSource {
     if (!this.employees[employeeId]) return null;
     this.setSeed(employeeId, callIndex);
     const callerName = faker.name.firstName() + ' ' + faker.name.lastName();
+    const transcript = this.getCallTranscript(employeeId, callIndex);
+    const secondsPerMessage = faker.random.number(45) + 7;
     return {
       id: `${employeeId}-${callIndex}`,
-      duration: faker.random.number(),
+      duration: transcript.length * secondsPerMessage + faker.random.number(100),
       timestamp: faker.random.number(220838400) + 1344352809,
       status: faker.random.arrayElement(['flagged', 'unresolved', 'resolved']),
       caller: callerName,
-      transcript: this.getCallTranscript(employeeId, callIndex),
+      transcript, 
     };
   }
 

@@ -3,16 +3,16 @@ import { RouteComponentProps } from 'react-router';
 import { Query } from 'react-apollo';
 import { GET_EMPLOYEE, GetEmployeeVars } from '../../apollo/queries';
 import { EmployeeWithCalls } from '../../typings/api';
-import { Container, createStyles, makeStyles, Theme } from '@material-ui/core';
+import { Container, createStyles, makeStyles, Theme, Avatar, Typography, Card } from '@material-ui/core';
 import styleProps from '../../constants/styleProps';
+import EmployeeDetails from '../EmployeeDetails';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    container: { width: '100vw' },
     heroContainer: {
       width: '100%',
       overflow: 'hidden',
-      height: '200px',
+      height: 220,
       position: 'relative',
     },
     hero: {
@@ -21,8 +21,35 @@ const useStyles = makeStyles((theme: Theme) =>
       position: 'absolute',
       top: '-5%',
       left: '-5%',
-      opacity: 0.4,
+      opacity: 0.2,
       ...styleProps.blurredHeroImage,
+    },
+    headerContainer: {
+      position: 'absolute',
+      bottom: 0,
+      display: 'flex',
+      flexFlow: 'row',
+      justifyContent: 'flex-start',
+      alignItems: 'flex-end',
+      width: '100%',
+    },
+    headerName: {
+      margin: theme.spacing(4),
+      fontWeight: 400,
+    },
+    subsectionTitle: {
+      width: '100%',
+      margin: theme.spacing(2),
+    },
+    avatar: {
+      width: 150,
+      height: 150,
+      margin: theme.spacing(4),
+      marginRight: 0,
+    },
+    detailsContainer: {
+      marginTop: theme.spacing(2),
+      padding: theme.spacing(1),
     },
   }),
 );
@@ -42,10 +69,19 @@ const RouteEmployee: React.FunctionComponent<RouteComponentProps<{ id: string }>
         if (data && data.employee) {
           const emp = data.employee;
           return (
-            <Container className={styles.container}>
+            <Container>
               <div className={styles.heroContainer}>
                 <div className={styles.hero} style={{ backgroundImage: `url(${emp.details.imageUrl})` }} />
+                <div className={styles.headerContainer}>
+                  <Avatar alt="Employee Image" src={emp.details.imageUrl} className={styles.avatar} />
+                  <Typography variant="h2" className={styles.headerName}>
+                    {emp.name}
+                  </Typography>
+                </div>
               </div>
+              <Card className={styles.detailsContainer}>
+                <EmployeeDetails employee={emp} />
+              </Card>
             </Container>
           );
         } else return <div>NO DATA!</div>;

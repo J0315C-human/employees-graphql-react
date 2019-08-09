@@ -8,6 +8,7 @@ import blueGrey from '@material-ui/core/colors/blueGrey';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import RouteMain from './components/RouteMain';
+import './global.css';
 
 const theme = createMuiTheme({
   palette: {
