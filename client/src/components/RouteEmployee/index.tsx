@@ -2,7 +2,7 @@ import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Query } from 'react-apollo';
 import { GET_EMPLOYEE, GetEmployeeVars } from '../../apollo/queries';
-import { Employee } from '../../typings/api';
+import { EmployeeWithCalls } from '../../typings/api';
 import { Container, createStyles, makeStyles, Theme } from '@material-ui/core';
 import styleProps from '../../constants/styleProps';
 
@@ -31,7 +31,7 @@ const RouteEmployee: React.FunctionComponent<RouteComponentProps<{ id: string }>
   const id = props.match.params.id;
   const styles = useStyles();
   return (
-    <Query<{ employee: Employee }, GetEmployeeVars> query={GET_EMPLOYEE} variables={{ id }}>
+    <Query<{ employee: EmployeeWithCalls }, GetEmployeeVars> query={GET_EMPLOYEE} variables={{ id }}>
       {({ data, loading, error }) => {
         if (loading) {
           return <div>LOADING...</div>;

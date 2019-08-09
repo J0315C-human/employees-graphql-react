@@ -19,6 +19,18 @@ details {
   age
 }`;
 
+const callContents = `
+  id
+  duration
+  timestamp
+  caller
+  transcript {
+    speaker
+    message
+  }
+  status
+`;
+
 export const GET_EMPLOYEES = gql`
   query EmployeeList ($offset: Int, $limit: Int, $search: String) {
     employees (offset: $offset, limit: $limit, search: $search) {
@@ -37,6 +49,9 @@ export const GET_EMPLOYEE = gql`
   query Employee($id: ID!) {
     employee(id: $id) {
       ${employeeContents}
+      calls {
+        ${callContents}
+      }
     }
   }
 `;

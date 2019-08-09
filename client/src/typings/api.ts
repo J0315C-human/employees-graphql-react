@@ -23,3 +23,16 @@ export interface Employee {
   contact: EmployeeContact;
   details: EmployeeDetails;
 }
+
+export interface Call {
+  id: string;
+  duration: number;
+  timestamp: number;
+  caller: string;
+  transcript: { speaker: string; message: string }[];
+  status: string;
+}
+
+export interface EmployeeWithCalls extends Employee {
+  calls: Call[];
+}
