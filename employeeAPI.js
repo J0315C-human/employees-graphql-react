@@ -2,6 +2,10 @@ const { RESTDataSource } = require('apollo-datasource-rest');
 const data = require('./data.js');
 const faker = require('faker');
 
+const getFakeNumCalls = () => faker.random.number(20) + 2;
+const sortByTimestampAscending = (x, y) => x.timestamp - y.timestamp;
+const sortByTimestampDescending = (x, y) => y.timestamp - x.timestamp;
+
 class EmployeeAPI extends RESTDataSource {
   constructor() {
     super();
@@ -18,28 +22,6 @@ class EmployeeAPI extends RESTDataSource {
     this.setSeed = this.setSeed.bind(this);
   }
 
-  // employeeReducer(emp, order) {
-  //   return {
-  //     name: emp.name.first + ' ' + emp.name.last,
-  //     id: `${order}`,
-  //     location: {
-  //       street: emp.location.street,
-  //       city: emp.location.city,
-  //       state: emp.location.state,
-  //       postcode: emp.location.postcode,
-  //     },
-  //     details: {
-  //       age: emp.dob.age,
-  //       imageUrl: emp.picture.large,
-  //     },
-  //     contact: {
-  //       email: emp.email,
-  //       phone: emp.phone,
-  //       username: emp.login.username,
-  //     }
-  //   }
-  // }
-
   employeeReducer(emp) {
     return {
       ...emp,
@@ -48,15 +30,16 @@ class EmployeeAPI extends RESTDataSource {
   }
   
   setSeed(employeeId, callId = 0){
-    faker.seed(1000 * parseInt(employeeId) + parseInt(callId));
+    faker.seed(1000 * (parseInt(`${employeeId}`) + 1) + parseInt(`${callId}`));
   }
 
   getEmployeeCalls(employeeId) {
     this.setSeed(employeeId);
-    const numCalls = faker.random.number(20) + 2;
-    return new Array(numCalls).fill(null).map((_, i) => 
+    const numCalls = getFakeNumCalls();
+    const calls = new Array(numCalls).fill(null).map((_, i) => 
       this.getEmployeeCall(employeeId, i)
-    )
+    );
+    return calls.sort(sortByTimestampDescending);
   }
 
   getEmployeeCall(employeeId, callIndex) {
@@ -89,18 +72,11 @@ class EmployeeAPI extends RESTDataSource {
   getCallById( { id }) {
     const [ empId, callNum ] = id.split('-');
     const callIdx = parseInt(callNum);
-    this.setSeed(empId)
-    const numCalls = faker.random.number(10) + 2;
+    this.setSeed(empId);
+    const numCalls = getFakeNumCalls();
     if (callIdx >= numCalls ) return null;
     return this.getEmployeeCall(empId, parseInt(callNum));
   }
-
-  // async getAllEmployees( { offset, limit }) {
-  //   const response = await this.get('', { results: 100, seed: 'abc' });
-  //   return response.results && Array.isArray(response.results)
-  //   ? response.results.map(this.employeeReducer)
-  //   : [];
-  // }
 
   getAllEmployees( { offset, limit, search }) {
     const startIdx = offset || 0;
