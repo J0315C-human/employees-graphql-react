@@ -68,7 +68,7 @@ class EmployeeAPI extends RESTDataSource {
     return {
       id: `${employeeId}-${callIndex}`,
       duration: transcript.length * secondsPerMessage + faker.random.number(100),
-      timestamp: faker.random.number(220838400) + 1344352809,
+      timestamp: faker.random.number(157766400) + 1407682335,
       status: faker.random.arrayElement(['flagged', 'unresolved', 'resolved']),
       caller: callerName,
       transcript, 

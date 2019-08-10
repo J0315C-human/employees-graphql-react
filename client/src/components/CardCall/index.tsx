@@ -8,6 +8,8 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import InfoDetail from '../InfoDetail';
 import { getDisplayDuration } from '../../utils';
+import { format } from 'date-fns';
+import FlagIcon from '@material-ui/icons/OutlinedFlag';
 
 interface CardCallProps {
   call: Call;
@@ -29,6 +31,11 @@ const useStyles = makeStyles((theme: Theme) =>
         cursor: 'pointer',
       },
     },
+    icon: {
+      fontSize: 40,
+      position: 'absolute',
+      right: 10,
+    },
   }),
 );
 
@@ -39,13 +46,15 @@ const CardCall: React.FunctionComponent<CardCallProps> = props => {
   const { id, duration, timestamp, caller, status } = props.call;
 
   const infoDetailStyle = { width: '25%' };
+  const displayTime = format(new Date(timestamp * 1000), 'MMM Do, YYYY h:mm a');
   return (
     <Link to={`../calls/${id}`} style={{ textDecoration: 'none' }}>
       <Card className={styles.root} onMouseEnter={toggleRaised} onMouseLeave={toggleRaised} raised={raised}>
         <InfoDetail title="caller" value={caller} style={infoDetailStyle} />
-        <InfoDetail title="time" value="12:03PM" style={infoDetailStyle} />
+        <InfoDetail title="time" value={displayTime} style={infoDetailStyle} />
         <InfoDetail title="duration" value={getDisplayDuration(duration)} style={infoDetailStyle} />
         <InfoDetail title="status" value={status} style={infoDetailStyle} />
+        {status === 'flagged' && <FlagIcon className={styles.icon} />}
       </Card>
     </Link>
   );
