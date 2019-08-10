@@ -59,3 +59,15 @@ export const GET_EMPLOYEE = gql`
 export interface GetEmployeeVars {
   id: string;
 }
+
+export const GET_CALL = gql`
+  query Call($id: ID!) {
+    call(id: $id) {
+      ${callContents}
+    }
+  }
+`;
+
+export interface GetCallVars {
+  id: string;
+}

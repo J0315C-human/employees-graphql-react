@@ -17,7 +17,7 @@ interface EmployeeDetailsProps {
 
 const EmployeeDetails: React.FunctionComponent<EmployeeDetailsProps> = props => {
   const { employee: emp } = props;
-  const { avgCallLength, resolutionRate, flaggedCalls } = getEmployeeStats(props.employee);
+  const { avgCallLength, resolutionRate, flaggedCalls } = getEmployeeStats(emp);
   return (
     <div style={styleProps.rowWrapCentered}>
       <TitleSubsection>About</TitleSubsection>

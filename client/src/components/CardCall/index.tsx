@@ -7,8 +7,7 @@ import { Theme } from '@material-ui/core/styles';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import InfoDetail from '../InfoDetail';
-import { getDisplayDuration } from '../../utils';
-import { format } from 'date-fns';
+import { getDisplayDuration, getDisplayDateTime } from '../../utils';
 import FlagIcon from '@material-ui/icons/OutlinedFlag';
 
 interface CardCallProps {
@@ -46,7 +45,7 @@ const CardCall: React.FunctionComponent<CardCallProps> = props => {
   const { id, duration, timestamp, caller, status } = props.call;
 
   const infoDetailStyle = { width: '25%' };
-  const displayTime = format(new Date(timestamp * 1000), 'MMM Do, YYYY h:mm a');
+  const displayTime = getDisplayDateTime(timestamp);
   return (
     <Link to={`../calls/${id}`} style={{ textDecoration: 'none' }}>
       <Card className={styles.root} onMouseEnter={toggleRaised} onMouseLeave={toggleRaised} raised={raised}>

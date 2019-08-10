@@ -1,10 +1,11 @@
 import React from 'react';
-import { RouteComponentProps, Route, Redirect, Link } from 'react-router-dom';
+import { RouteComponentProps, Route, Redirect } from 'react-router-dom';
 import SwitchTransition from '../SwitchTransition';
 import RouteEmployees from '../RouteEmployees';
 import RouteEmployee from '../RouteEmployee';
 import RouteHome from '../RouteHome';
 import NavMain from '../NavMain';
+import RouteCall from '../RouteCall';
 
 const pageAnimationProps = {
   from: { opacity: 0, transform: 'translate3d(0,100px,0)' },
@@ -29,6 +30,8 @@ const RouteMain: React.FunctionComponent<RouteComponentProps> = props => {
       <SwitchTransition location={props.location} animationProps={pageAnimationProps}>
         <Route path="/employees/:id" component={RouteEmployee} />
         <Route path="/employees" component={RouteEmployees} />
+        <Route path="/calls/:id" component={RouteCall} />
+        {/* <Route path="/calls" component={RouteCalls} /> */}
         <Route path="/home" component={RouteHome} />
         <Redirect from="/" to="/home" />
       </SwitchTransition>
