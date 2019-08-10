@@ -27,7 +27,12 @@ const CallDetails: React.FunctionComponent<CallDetailsProps> = props => {
       <TitleSubsection>Call Transcript</TitleSubsection>
       <Container>
         {call.transcript.map((msg, i) => (
-          <TranscriptMessage speaker={msg.speaker} message={msg.message} isAgent={msg.speaker !== call.caller} />
+          <TranscriptMessage
+            key={i}
+            speaker={msg.speaker}
+            message={msg.message}
+            isAgent={msg.speaker !== call.caller}
+          />
         ))}
       </Container>
     </div>

@@ -7,28 +7,16 @@ import RouteHome from '../RouteHome';
 import NavMain from '../NavMain';
 import RouteCall from '../RouteCall';
 import RouteCalls from '../RouteCalls';
-
-const pageAnimationProps = {
-  from: { opacity: 0, transform: 'translate3d(0,100px,0)' },
-  enter: { opacity: 1, transform: 'translate3d(0,0px,0)' },
-  leave: { opacity: 0, transform: 'translate3d(0,100px,0)' },
-};
-
-const navAnimationProps = {
-  from: { opacity: 0 },
-  enter: { opacity: 1 },
-  leave: { opacity: 0 },
-  trail: 400,
-};
+import transitionProps from '../../constants/transitionProps';
 
 const RouteMain: React.FunctionComponent<RouteComponentProps> = props => {
   return (
     <>
-      <SwitchTransition location={props.location} animationProps={navAnimationProps}>
+      <SwitchTransition location={props.location} animationProps={transitionProps.navBarFade}>
         <Route exact path="/" render={() => null} />
         <Route path="/" component={NavMain} />
       </SwitchTransition>
-      <SwitchTransition location={props.location} animationProps={pageAnimationProps}>
+      <SwitchTransition location={props.location} animationProps={transitionProps.pageDeeper}>
         <Route path="/employees/:id" component={RouteEmployee} />
         <Route path="/employees" component={RouteEmployees} />
         <Route path="/calls/:id" component={RouteCall} />
