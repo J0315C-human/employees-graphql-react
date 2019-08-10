@@ -23,11 +23,15 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: theme.spacing(1),
       padding: theme.spacing(0.5),
       width: 200,
+      height: 210,
       color: theme.palette.common.black,
       alignItems: 'center',
       '&:hover': {
         cursor: 'pointer',
       },
+    },
+    link: {
+      textDecoration: 'none',
     },
     text: {
       margin: theme.spacing(1),
@@ -36,6 +40,7 @@ const useStyles = makeStyles((theme: Theme) =>
     img: {
       width: 100,
       height: 100,
+      flexShrink: 0,
       margin: theme.spacing(1),
       zIndex: 1,
       borderRadius: '50%',
@@ -56,10 +61,10 @@ const CardEmployee: React.FunctionComponent<CardEmployeeProps> = props => {
   const styles = useStyles();
   const [raised, setRaised] = useState(false);
   const toggleRaised = () => setRaised(!raised);
-  const { name, id, details } = props.employee;
+  const { name, id, details, location } = props.employee;
 
   return (
-    <Link to={`../employees/${id}`}>
+    <Link to={`../employees/${id}`} className={styles.link}>
       <Card className={styles.root} onMouseEnter={toggleRaised} onMouseLeave={toggleRaised} raised={raised}>
         <div
           className={styles.blurredBackground}
@@ -74,9 +79,11 @@ const CardEmployee: React.FunctionComponent<CardEmployeeProps> = props => {
           className={styles.img}
           style={{ transform: raised ? 'scale(1.1)' : 'scale(1)' }}
         />
-        <Typography className={styles.text}>{name}</Typography>
-        <Typography className={styles.text} color="textSecondary">
-          {id}
+        <Typography className={styles.text} align="center">
+          {name}
+        </Typography>
+        <Typography className={styles.text} color="textSecondary" align="center">
+          {location.city + ', ' + location.state}
         </Typography>
       </Card>
     </Link>
