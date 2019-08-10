@@ -26,7 +26,7 @@ export default class RouteEmployees extends React.Component<RouteComponentProps<
   public render() {
     const { searchQuery, animateIn } = this.state;
     return (
-      <Container style={{ ...styleProps.rowWrapCentered, width: '100vw' }}>
+      <Container style={{ ...styleProps.rowWrapCentered, ...styleProps.pageScrollBox }}>
         <InputSearch onChange={this.onSearchChange} />
         <Query<{ employees: Employee[] }, GetEmployeesVars>
           query={GET_EMPLOYEES}

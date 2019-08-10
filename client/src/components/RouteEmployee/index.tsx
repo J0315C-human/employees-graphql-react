@@ -60,39 +60,41 @@ const RouteEmployee: React.FunctionComponent<RouteComponentProps<{ id: string }>
   const id = props.match.params.id;
   const styles = useStyles();
   return (
-    <Query<{ employee: EmployeeWithCalls }, GetEmployeeVars> query={GET_EMPLOYEE} variables={{ id }}>
-      {({ data, loading, error }) => {
-        if (loading) {
-          return <div>LOADING...</div>;
-        }
-        if (error) {
-          return <div>{error}</div>;
-        }
-        if (data && data.employee) {
-          const emp = data.employee;
-          return (
-            <Container style={{ marginBottom: 30 }}>
-              <div className={styles.heroContainer}>
-                <div className={styles.hero} style={{ backgroundImage: `url(${emp.details.imageUrl})` }} />
-                <div className={styles.headerContainer}>
-                  <Avatar alt="Employee Image" src={emp.details.imageUrl} className={styles.avatar} />
-                  <Typography variant="h2" className={styles.headerName}>
-                    {emp.name}
-                  </Typography>
+    <Container style={{ ...styleProps.rowWrapCentered, ...styleProps.pageScrollBox }}>
+      <Query<{ employee: EmployeeWithCalls }, GetEmployeeVars> query={GET_EMPLOYEE} variables={{ id }}>
+        {({ data, loading, error }) => {
+          if (loading) {
+            return <div>LOADING...</div>;
+          }
+          if (error) {
+            return <div>{error}</div>;
+          }
+          if (data && data.employee) {
+            const emp = data.employee;
+            return (
+              <Container style={{ marginBottom: 30 }}>
+                <div className={styles.heroContainer}>
+                  <div className={styles.hero} style={{ backgroundImage: `url(${emp.details.imageUrl})` }} />
+                  <div className={styles.headerContainer}>
+                    <Avatar alt="Employee Image" src={emp.details.imageUrl} className={styles.avatar} />
+                    <Typography variant="h2" className={styles.headerName}>
+                      {emp.name}
+                    </Typography>
+                  </div>
                 </div>
-              </div>
-              <Card className={styles.detailsContainer}>
-                <EmployeeDetails employee={emp} />
-              </Card>
-              <TitleSubsection>Recent Calls</TitleSubsection>
-              {emp.calls.map((call, i) => (
-                <CardCall call={call} key={i} />
-              ))}
-            </Container>
-          );
-        } else return <div>NO DATA!</div>;
-      }}
-    </Query>
+                <Card className={styles.detailsContainer}>
+                  <EmployeeDetails employee={emp} />
+                </Card>
+                <TitleSubsection>Recent Calls</TitleSubsection>
+                {emp.calls.map((call, i) => (
+                  <CardCall call={call} key={i} />
+                ))}
+              </Container>
+            );
+          } else return <div>NO DATA!</div>;
+        }}
+      </Query>
+    </Container>
   );
 };
 

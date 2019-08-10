@@ -16,6 +16,12 @@ const styleProps = {
     justifyContent: 'center',
     alignItems: 'center',
   },
+  pageScrollBox: {
+    height: '100vh',
+    width: '100vw',
+    overflow: 'auto',
+    marginTop: 70,
+  },
 };
 
 export default styleProps;
