@@ -1,10 +1,11 @@
 import React from 'react';
-import { RouteComponentProps, Link } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 import { AppBar, Toolbar, IconButton, Typography, makeStyles, Theme, createStyles } from '@material-ui/core';
 import Home from '@material-ui/icons/HomeOutlined';
 import Face from '@material-ui/icons/FaceOutlined';
 import Phone from '@material-ui/icons/PhoneOutlined';
 import ListAlt from '@material-ui/icons/ListAltOutlined';
+import CustomLink from '../CustomLink';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,15 +29,15 @@ const NavMain: React.FunctionComponent<RouteComponentProps> = props => {
   return (
     <AppBar position="fixed">
       <Toolbar>
-        <Link to="/" className={styles.link}>
+        <CustomLink to="/" className={styles.link}>
           <IconButton color="inherit" aria-label="open home" edge="start" className={styles.navBtn}>
             <Home />
             <Typography variant="h6" noWrap className={styles.btnText}>
               {'Home'}
             </Typography>
           </IconButton>
-        </Link>
-        <Link to="/employees" className={styles.link}>
+        </CustomLink>
+        <CustomLink to="/employees" className={styles.link}>
           <IconButton
             color="inherit"
             aria-label="open employees"
@@ -49,8 +50,8 @@ const NavMain: React.FunctionComponent<RouteComponentProps> = props => {
               {'Employees'}
             </Typography>
           </IconButton>
-        </Link>
-        <Link to="/calls" className={styles.link}>
+        </CustomLink>
+        <CustomLink to="/calls" className={styles.link}>
           <IconButton
             color="inherit"
             aria-label="open calls"
@@ -62,8 +63,8 @@ const NavMain: React.FunctionComponent<RouteComponentProps> = props => {
               {'Calls'}
             </Typography>
           </IconButton>
-        </Link>
-        <Link to="/reports" className={styles.link}>
+        </CustomLink>
+        <CustomLink to="/reports" className={styles.link}>
           <IconButton
             color="inherit"
             aria-label="open reports"
@@ -76,7 +77,7 @@ const NavMain: React.FunctionComponent<RouteComponentProps> = props => {
               {'Reports'}
             </Typography>
           </IconButton>
-        </Link>
+        </CustomLink>
       </Toolbar>
     </AppBar>
   );

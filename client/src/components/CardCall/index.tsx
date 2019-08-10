@@ -5,7 +5,7 @@ import makeStyles from '@material-ui/styles/makeStyles';
 import createStyles from '@material-ui/styles/createStyles';
 import { Theme } from '@material-ui/core/styles';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import CustomLink from '../CustomLink';
 import InfoDetail from '../InfoDetail';
 import { getDisplayDuration, getDisplayDateTime } from '../../utils';
 import FlagIcon from '@material-ui/icons/OutlinedFlag';
@@ -48,7 +48,7 @@ const CardCall: React.FunctionComponent<CardCallProps> = props => {
   const infoDetailStyle = { width: '25%' };
   const displayTime = getDisplayDateTime(timestamp);
   return (
-    <Link to={`../calls/${id}`} style={{ textDecoration: 'none', width: '100%' }}>
+    <CustomLink to={`../calls/${id}`} style={{ textDecoration: 'none', width: '100%' }}>
       <Card className={styles.root} onMouseEnter={toggleRaised} onMouseLeave={toggleRaised} raised={raised}>
         <InfoDetail title="caller" value={caller} style={infoDetailStyle} />
         {!props.hideEmployeeName && <InfoDetail title="employee" value={employee} style={infoDetailStyle} />}
@@ -57,7 +57,7 @@ const CardCall: React.FunctionComponent<CardCallProps> = props => {
         <InfoDetail title="status" value={status} style={infoDetailStyle} />
         {status === 'flagged' && <FlagIcon className={styles.icon} />}
       </Card>
-    </Link>
+    </CustomLink>
   );
 };
 

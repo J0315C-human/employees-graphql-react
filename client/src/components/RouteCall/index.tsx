@@ -9,13 +9,6 @@ import CallDetails from '../CallDetails';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    headerContainer: {
-      display: 'flex',
-      flexFlow: 'row',
-      justifyContent: 'flex-start',
-      alignItems: 'flex-end',
-      width: '100%',
-    },
     headerName: {
       margin: theme.spacing(4),
       fontWeight: 400,
@@ -48,11 +41,9 @@ const RouteCall: React.FunctionComponent<RouteComponentProps<{ id: string }>> = 
             const { call } = data;
             return (
               <Container style={{ marginBottom: 30 }}>
-                <div className={styles.headerContainer}>
-                  <Typography variant="h3" className={styles.headerName}>
-                    {`Call ${id} with ${call.caller}`}
-                  </Typography>
-                </div>
+                <Typography variant="h3" className={styles.headerName} align="center">
+                  {`Call ${id} with ${call.caller}`}
+                </Typography>
                 <Card className={styles.detailsContainer}>
                   <CallDetails call={call} />
                 </Card>

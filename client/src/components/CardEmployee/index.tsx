@@ -7,8 +7,8 @@ import { Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import CardMedia from '@material-ui/core/CardMedia';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import styleProps from '../../constants/styleProps';
+import CustomLink from '../CustomLink';
 
 interface CardEmployeeProps {
   employee: Employee;
@@ -64,7 +64,7 @@ const CardEmployee: React.FunctionComponent<CardEmployeeProps> = props => {
   const { name, id, details, location } = props.employee;
 
   return (
-    <Link to={`../employees/${id}`} className={styles.link}>
+    <CustomLink to={`../employees/${id}`} className={styles.link}>
       <Card className={styles.root} onMouseEnter={toggleRaised} onMouseLeave={toggleRaised} raised={raised}>
         <div
           className={styles.blurredBackground}
@@ -86,7 +86,7 @@ const CardEmployee: React.FunctionComponent<CardEmployeeProps> = props => {
           {location.city + ', ' + location.state}
         </Typography>
       </Card>
-    </Link>
+    </CustomLink>
   );
 };
 
