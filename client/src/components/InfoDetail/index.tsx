@@ -23,8 +23,12 @@ const InfoDetail: React.FunctionComponent<InfoDetailProps> = props => {
   const styles = useStyles();
   return (
     <div className={styles.outer} style={props.style}>
-      <Typography variant="body2">{props.title}</Typography>
-      <Typography variant="h6">{props.value}</Typography>
+      <Typography variant="body2" align="center">
+        {props.title}
+      </Typography>
+      <Typography variant="h6" align="center">
+        {props.value}
+      </Typography>
     </div>
   );
 };
