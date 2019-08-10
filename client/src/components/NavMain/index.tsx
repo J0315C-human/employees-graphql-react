@@ -28,7 +28,7 @@ const NavMain: React.FunctionComponent<RouteComponentProps> = props => {
   return (
     <AppBar position="fixed">
       <Toolbar>
-        <Link to="/home" className={styles.link}>
+        <Link to="/" className={styles.link}>
           <IconButton color="inherit" aria-label="open home" edge="start" className={styles.navBtn}>
             <Home />
             <Typography variant="h6" noWrap className={styles.btnText}>

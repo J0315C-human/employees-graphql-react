@@ -25,7 +25,7 @@ const RouteMain: React.FunctionComponent<RouteComponentProps> = props => {
   return (
     <>
       <SwitchTransition location={props.location} animationProps={navAnimationProps}>
-        <Route path="/home" render={() => null} />
+        <Route exact path="/" render={() => null} />
         <Route path="/" component={NavMain} />
       </SwitchTransition>
       <SwitchTransition location={props.location} animationProps={pageAnimationProps}>
@@ -33,8 +33,7 @@ const RouteMain: React.FunctionComponent<RouteComponentProps> = props => {
         <Route path="/employees" component={RouteEmployees} />
         <Route path="/calls/:id" component={RouteCall} />
         <Route path="/calls" component={RouteCalls} />
-        <Route path="/home" component={RouteHome} />
-        <Redirect from="/" to="/home" />
+        <Route path="/" component={RouteHome} />
       </SwitchTransition>
     </>
   );
