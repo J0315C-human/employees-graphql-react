@@ -20,7 +20,7 @@ const styleProps = {
     height: '100vh',
     width: '100vw',
     overflow: 'auto',
-    marginTop: 70,
+    paddingTop: 75,
   },
 };
 
