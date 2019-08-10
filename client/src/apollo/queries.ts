@@ -71,3 +71,17 @@ export const GET_CALL = gql`
 export interface GetCallVars {
   id: string;
 }
+
+export const GET_CALLS = gql`
+  query CallList ($offset: Int, $limit: Int, $search: String) {
+    calls (offset: $offset, limit: $limit, search: $search) {
+      ${callContents}
+    }
+  }
+`;
+
+export interface GetCallsVars {
+  offset?: number;
+  limit?: number;
+  search?: string;
+}

@@ -9,8 +9,6 @@ const sortByTimestampDescending = (x, y) => y.timestamp - x.timestamp;
 class EmployeeAPI extends RESTDataSource {
   constructor() {
     super();
-    // this.baseURL = 'https://randomuser.me/api/';
-    // add indices as 'ids'
     this.employees = data;
     this.getEmployeeCalls = this.getEmployeeCalls.bind(this);
     this.employeeReducer = this.
@@ -78,7 +76,7 @@ class EmployeeAPI extends RESTDataSource {
     return this.getEmployeeCall(empId, parseInt(callNum));
   }
 
-  getAllEmployees( { offset, limit, search }) {
+  getAllEmployees( { offset, limit, search } ) {
     const startIdx = offset || 0;
     const query = search ? search.trim().toLowerCase() : '';
     const filtered = this.employees.filter(emp => emp.name.toLowerCase().includes(query))
@@ -88,6 +86,18 @@ class EmployeeAPI extends RESTDataSource {
   getEmployeeById( { id } ) {
     const emp = this.employees[parseInt(id)];
     return emp ? this.employeeReducer(emp) : null;
+  }
+
+  getCalls( { offset, limit, search } ) {
+    const startIdx = offset || 0;
+    const query = search ? search.trim().toLowerCase() : '';
+    const allCalls = this.employees.reduce((calls, curEmp) => {
+      return calls.concat(this.getEmployeeCalls(curEmp.id))
+    }, []);
+    const filtered = allCalls.filter(call => call.caller.toLowerCase().includes(query))
+    return filtered
+      .sort(sortByTimestampDescending)
+      .slice(startIdx, startIdx + limit);
   }
 }
 

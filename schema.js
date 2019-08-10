@@ -5,6 +5,7 @@ const typeDefs = gql`
   type Query {
     employees(offset: Int, limit: Int, search: String): [Employee]!
     employee(id: ID!): Employee
+    calls(offset: Int, limit: Int, search: String): [Call]!
     call(id: ID!): Call
   }
 
