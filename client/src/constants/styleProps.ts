@@ -8,7 +8,7 @@ const styleProps = {
     display: 'flex',
     flexFlow: 'row wrap',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-start',
   },
   columnCentered: {
     display: 'flex',

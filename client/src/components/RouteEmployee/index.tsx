@@ -8,6 +8,7 @@ import styleProps from '../../constants/styleProps';
 import EmployeeDetails from '../EmployeeDetails';
 import TitleSubsection from '../TitleSubsection';
 import CardCall from '../CardCall';
+import CollectionCall from '../CollectionCall';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -86,9 +87,7 @@ const RouteEmployee: React.FunctionComponent<RouteComponentProps<{ id: string }>
                   <EmployeeDetails employee={emp} />
                 </Card>
                 <TitleSubsection>Recent Calls</TitleSubsection>
-                {emp.calls.map((call, i) => (
-                  <CardCall call={call} key={i} />
-                ))}
+                <CollectionCall calls={emp.calls} animateIn />
               </Container>
             );
           } else return <div>NO DATA!</div>;
