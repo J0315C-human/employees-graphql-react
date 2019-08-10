@@ -29,6 +29,7 @@ export interface Call {
   duration: number;
   timestamp: number;
   caller: string;
+  employee: string;
   transcript: { speaker: string; message: string }[];
   status: string;
 }

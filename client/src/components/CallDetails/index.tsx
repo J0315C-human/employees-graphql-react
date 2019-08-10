@@ -19,6 +19,7 @@ const CallDetails: React.FunctionComponent<CallDetailsProps> = props => {
       <TitleSubsection>Details</TitleSubsection>
       <Grid container spacing={2} justify="center">
         <InfoDetail title="caller" value={call.caller} />
+        <InfoDetail title="employee" value={call.employee} />
         <InfoDetail title="date/time" value={dateTime} />
         <InfoDetail title="duration" value={length} />
         <InfoDetail title="status" value={call.status} />

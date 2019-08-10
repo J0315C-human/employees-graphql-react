@@ -24,6 +24,7 @@ const callContents = `
   duration
   timestamp
   caller
+  employee
   transcript {
     speaker
     message

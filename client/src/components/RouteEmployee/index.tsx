@@ -7,7 +7,6 @@ import { Container, createStyles, makeStyles, Theme, Avatar, Typography, Card } 
 import styleProps from '../../constants/styleProps';
 import EmployeeDetails from '../EmployeeDetails';
 import TitleSubsection from '../TitleSubsection';
-import CardCall from '../CardCall';
 import CollectionCall from '../CollectionCall';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -87,7 +86,7 @@ const RouteEmployee: React.FunctionComponent<RouteComponentProps<{ id: string }>
                   <EmployeeDetails employee={emp} />
                 </Card>
                 <TitleSubsection>Recent Calls</TitleSubsection>
-                <CollectionCall calls={emp.calls} animateIn />
+                <CollectionCall calls={emp.calls} animateIn hideEmployeeName />
               </Container>
             );
           } else return <div>NO DATA!</div>;

@@ -8,10 +8,11 @@ import transitionProps from '../../constants/transitionProps';
 interface CollectionCallProps {
   calls: Call[];
   animateIn: boolean;
+  hideEmployeeName?: boolean;
 }
 
 const CollectionCall: React.FunctionComponent<CollectionCallProps> = props => {
-  const { calls, animateIn } = props;
+  const { calls, animateIn, hideEmployeeName } = props;
   const transitions = useTransition(calls, call => call.id, {
     ...transitionProps.fadeDropIn,
     trail: 50,
@@ -22,10 +23,10 @@ const CollectionCall: React.FunctionComponent<CollectionCallProps> = props => {
       {animateIn
         ? transitions.map(({ item, props, key }) => (
             <animated.div key={key} style={{ ...props, width: '100%' }}>
-              <CardCall call={item} />
+              <CardCall hideEmployeeName={hideEmployeeName} call={item} />
             </animated.div>
           ))
-        : calls.map((call, i) => <CardCall call={call} key={i} />)}
+        : calls.map((call, i) => <CardCall hideEmployeeName={hideEmployeeName} call={call} key={i} />)}
     </Grid>
   );
 };

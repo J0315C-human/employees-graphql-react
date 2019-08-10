@@ -5,11 +5,23 @@ const faker = require('faker');
 const getFakeNumCalls = () => faker.random.number(20) + 2;
 const sortByTimestampAscending = (x, y) => x.timestamp - y.timestamp;
 const sortByTimestampDescending = (x, y) => y.timestamp - x.timestamp;
+const toTitleCase = (words) => {
+  const parts = words.split(' ');
+  return parts.map((part) => part[0].toUpperCase() + part.slice(1)).join(' ');
+}
 
 class EmployeeAPI extends RESTDataSource {
   constructor() {
     super();
-    this.employees = data;
+    this.employees = data.map(emp => ({
+      ...emp,
+      name: toTitleCase(emp.name),
+      location: {
+        ...emp.location,
+        city: toTitleCase(emp.location.city),
+        state: toTitleCase(emp.location.state),
+      }
+    }));
     this.getEmployeeCalls = this.getEmployeeCalls.bind(this);
     this.employeeReducer = this.
     employeeReducer.bind(this);
@@ -41,7 +53,9 @@ class EmployeeAPI extends RESTDataSource {
   }
 
   getEmployeeCall(employeeId, callIndex) {
-    if (!this.employees[employeeId]) return null;
+    const emp = this.employees[employeeId];
+    if (!emp) return null;
+
     this.setSeed(employeeId, callIndex);
     const callerName = faker.name.firstName() + ' ' + faker.name.lastName();
     const transcript = this.getCallTranscript(employeeId, callIndex);
@@ -52,6 +66,7 @@ class EmployeeAPI extends RESTDataSource {
       timestamp: faker.random.number(157766400) + 1407682335,
       status: faker.random.arrayElement(['flagged', 'unresolved', 'resolved']),
       caller: callerName,
+      employee: emp.name,
       transcript, 
     };
   }
@@ -94,7 +109,9 @@ class EmployeeAPI extends RESTDataSource {
     const allCalls = this.employees.reduce((calls, curEmp) => {
       return calls.concat(this.getEmployeeCalls(curEmp.id))
     }, []);
-    const filtered = allCalls.filter(call => call.caller.toLowerCase().includes(query))
+    const filtered = allCalls.filter(call => 
+        call.caller.toLowerCase().includes(query)
+     || call.employee.toLowerCase().includes(query));
     return filtered
       .sort(sortByTimestampDescending)
       .slice(startIdx, startIdx + limit);

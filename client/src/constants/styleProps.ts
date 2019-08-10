@@ -21,6 +21,7 @@ const styleProps = {
     width: '100vw',
     overflow: 'auto',
     paddingTop: 75,
+    paddingBottom: 75,
   },
 };
 

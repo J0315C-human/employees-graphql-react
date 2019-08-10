@@ -41,6 +41,7 @@ const typeDefs = gql`
     duration: Int!
     timestamp: Int!
     caller: String!
+    employee: String!
     transcript: [CallTranscriptPart!]!
     status: String
   }

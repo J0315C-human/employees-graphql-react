@@ -5,8 +5,8 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     subsectionTitle: {
       width: '100%',
-      margin: theme.spacing(2),
-      color: theme.palette.primary.dark,
+      margin: theme.spacing(3),
+      color: theme.palette.primary.light,
       fontWeight: 500,
     },
   }),
