@@ -24,8 +24,8 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const RouteCall: React.FunctionComponent<RouteComponentProps<{ id: string }>> = props => {
-  const id = props.match.params.id;
+const RouteCall: React.FunctionComponent<RouteComponentProps<{ callId: string }>> = props => {
+  const id = props.match.params.callId;
   const styles = useStyles();
   return (
     <Container style={{ ...styleProps.rowWrapCentered, ...styleProps.pageScrollBox }}>

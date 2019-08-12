@@ -56,8 +56,8 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const RouteEmployee: React.FunctionComponent<RouteComponentProps<{ id: string }>> = props => {
-  const id = props.match.params.id;
+const RouteEmployee: React.FunctionComponent<RouteComponentProps<{ empId: string }>> = props => {
+  const id = props.match.params.empId;
   const styles = useStyles();
   return (
     <Container style={{ ...styleProps.rowWrapCentered, ...styleProps.pageScrollBox }}>
@@ -86,7 +86,12 @@ const RouteEmployee: React.FunctionComponent<RouteComponentProps<{ id: string }>
                   <EmployeeDetails employee={emp} />
                 </Card>
                 <TitleSubsection>Recent Calls</TitleSubsection>
-                <CollectionCall calls={emp.calls} animateIn hideEmployeeName />
+                <CollectionCall
+                  calls={emp.calls}
+                  animateIn
+                  hideEmployeeName
+                  linkPrefix={`../employees/${emp.id}/calls/`}
+                />
               </Container>
             );
           } else return <div>NO DATA!</div>;

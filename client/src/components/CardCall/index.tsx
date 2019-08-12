@@ -13,6 +13,7 @@ import FlagIcon from '@material-ui/icons/OutlinedFlag';
 interface CardCallProps {
   call: Call;
   hideEmployeeName?: boolean;
+  linkPrefix: string;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -39,16 +40,17 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+const infoDetailStyle = { width: '25%' };
+
 const CardCall: React.FunctionComponent<CardCallProps> = props => {
   const styles = useStyles();
   const [raised, setRaised] = useState(false);
   const toggleRaised = () => setRaised(!raised);
   const { id, duration, timestamp, caller, employee, status } = props.call;
 
-  const infoDetailStyle = { width: '25%' };
   const displayTime = getDisplayDateTime(timestamp);
   return (
-    <CustomLink to={`../calls/${id}`} style={{ textDecoration: 'none', width: '100%' }}>
+    <CustomLink to={`${props.linkPrefix}${id}`} style={{ textDecoration: 'none', width: '100%' }}>
       <Card className={styles.root} onMouseEnter={toggleRaised} onMouseLeave={toggleRaised} raised={raised}>
         <InfoDetail title="caller" value={caller} style={infoDetailStyle} />
         {!props.hideEmployeeName && <InfoDetail title="employee" value={employee} style={infoDetailStyle} />}

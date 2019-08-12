@@ -40,7 +40,7 @@ export default class RouteCalls extends React.Component<RouteComponentProps<{}>,
               return <div>{error}</div>;
             }
             if (data && data.calls) {
-              return <CollectionCall calls={data.calls} animateIn={animateIn} />;
+              return <CollectionCall calls={data.calls} animateIn={animateIn} linkPrefix="calls/" />;
             } else return <div>NO DATA!</div>;
           }}
         </Query>

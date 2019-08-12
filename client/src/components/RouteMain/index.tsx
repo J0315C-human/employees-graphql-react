@@ -30,9 +30,10 @@ const RouteMain: React.FunctionComponent<RouteComponentProps> = props => {
         <Route path="/" component={NavMain} />
       </SwitchTransition>
       <SwitchTransition location={props.location} animationProps={pageTransition}>
-        <Route path="/employees/:id" component={RouteEmployee} />
+        <Route path="/employees/:empId/calls/:callId" component={RouteCall} />
+        <Route path="/employees/:empId" component={RouteEmployee} />
         <Route path="/employees" component={RouteEmployees} />
-        <Route path="/calls/:id" component={RouteCall} />
+        <Route path="/calls/:callId" component={RouteCall} />
         <Route path="/calls" component={RouteCalls} />
         <Route path="/" component={RouteHome} />
       </SwitchTransition>
