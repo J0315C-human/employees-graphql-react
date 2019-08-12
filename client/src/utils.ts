@@ -7,3 +7,7 @@ export const getDisplayDuration = (seconds: number) => {
 };
 
 export const getDisplayDateTime = (timestamp: number) => format(new Date(timestamp * 1000), 'MMM Do, YYYY h:mm a');
+
+export const getRouteDepth = (path: string) => {
+  return path.split('/').filter(part => part !== '').length;
+};

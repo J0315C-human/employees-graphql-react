@@ -10,15 +10,20 @@ const transitionProps = {
     leave: { opacity: 0 },
     trail: 400,
   },
+  pageLateral: {
+    from: { opacity: 0, transform: 'scale(1)' },
+    enter: { opacity: 1, transform: 'scale(1)' },
+    leave: { opacity: 0, transform: 'scale(1)' },
+  },
   pageDeeper: {
-    from: { opacity: 0, transform: 'translate3d(0,100px,0)' },
-    enter: { opacity: 1, transform: 'translate3d(0,0px,0)' },
-    leave: { opacity: 0, transform: 'translate3d(0,100px,0)' },
+    from: { opacity: 0, transform: 'scale(0.87)' },
+    enter: { opacity: 1, transform: 'scale(1)' },
+    leave: { opacity: 0, transform: 'scale(1)' },
   },
   pageShallower: {
-    from: { opacity: 0, transform: 'translate3d(0,100px,0)' },
-    enter: { opacity: 1, transform: 'translate3d(0,0px,0)' },
-    leave: { opacity: 0, transform: 'translate3d(0,100px,0)' },
+    from: { opacity: 0, transform: 'scale(1)' },
+    enter: { opacity: 1, transform: 'scale(1)' },
+    leave: { opacity: 0, transform: 'scale(0.87)' },
   },
 };
 
