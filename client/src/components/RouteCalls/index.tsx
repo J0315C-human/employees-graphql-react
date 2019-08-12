@@ -37,6 +37,13 @@ export default class RouteCalls extends React.Component<RouteComponentProps<{}>,
     return (
       <Container style={{ ...styleProps.rowWrapCentered, ...styleProps.pageScrollBox }}>
         <InputSearch onChange={this.onSearchChange} />
+        <PaginationWithQuery
+          query={GET_CALLS_PAGECOUNT}
+          search={searchQuery}
+          resultKey="callsPageCount"
+          limitPerPage={values.callsPerPage}
+          onPageChange={this.onChangePage}
+        />
         <Query<{ calls: Call[] }, GetCallsVars>
           query={GET_CALLS}
           variables={{ limit: values.callsPerPage, offset, search: searchQuery }}
@@ -53,13 +60,6 @@ export default class RouteCalls extends React.Component<RouteComponentProps<{}>,
             } else return <div>NO DATA!</div>;
           }}
         </Query>
-        <PaginationWithQuery
-          query={GET_CALLS_PAGECOUNT}
-          search={searchQuery}
-          resultKey="callsPageCount"
-          limitPerPage={values.callsPerPage}
-          onPageChange={this.onChangePage}
-        />
       </Container>
     );
   }

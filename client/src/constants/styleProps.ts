@@ -9,6 +9,7 @@ const styleProps = {
     flexFlow: 'row wrap',
     justifyContent: 'center',
     alignItems: 'flex-start',
+    alignContent: 'flex-start',
   },
   columnCentered: {
     display: 'flex',
