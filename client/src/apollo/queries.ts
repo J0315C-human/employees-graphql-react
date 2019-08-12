@@ -1,5 +1,4 @@
 import gql from 'graphql-tag';
-import values from '../constants/values';
 
 const employeeContents = `
 name
@@ -89,13 +88,13 @@ export interface GetCallsVars {
 }
 
 export const GET_EMPLOYEES_PAGECOUNT = gql`
-  query EmployeePages($offset: Int, $limit: Int, $search: String) {
-    employeesPageCount(limitPerPage: ${values.employeesPerPage})
+  query EmployeePages($limitPerPage: Int, $search: String) {
+    employeesPageCount(limitPerPage: $limitPerPage, search: $search)
   }
 `;
 
 export const GET_CALLS_PAGECOUNT = gql`
-  query EmployeePages($offset: Int, $limit: Int, $search: String) {
-    callsPageCount(limitPerPage: ${values.callsPerPage})
+  query EmployeePages($limitPerPage: Int, $search: String) {
+    callsPageCount(limitPerPage: $limitPerPage, search: $search)
   }
 `;

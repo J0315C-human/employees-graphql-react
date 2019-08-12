@@ -10,6 +10,18 @@ const toTitleCase = (words) => {
   return parts.map((part) => part[0].toUpperCase() + part.slice(1)).join(' ');
 }
 
+const filterEmployeesBySearch = (employees, search) => {
+  const query = search ? search.trim().toLowerCase() : '';
+  return employees.filter(emp => emp.name.toLowerCase().includes(query))
+}
+
+const filterCallsBySearch = (calls, search) => {
+  const query = search ? search.trim().toLowerCase() : '';
+  return calls.filter(call => 
+    call.caller.toLowerCase().includes(query)
+ || call.employee.toLowerCase().includes(query));
+}
+
 /** The data returned from these methods are heavily faked with faker.js, using IDs as seed values to 
  * maintain consistent return values and give the appearance of a "real" database.
  */
@@ -96,13 +108,13 @@ class EmployeeAPI extends RESTDataSource {
 
   getAllEmployees( { offset, limit, search } ) {
     const startIdx = offset || 0;
-    const query = search ? search.trim().toLowerCase() : '';
-    const filtered = this.employees.filter(emp => emp.name.toLowerCase().includes(query))
-    return filtered.slice(startIdx, startIdx + limit).map(this.employeeReducer);
+    return filterEmployeesBySearch(this.employees, search)
+      .slice(startIdx, startIdx + limit).map(this.employeeReducer);
   }
 
-  getEmployeesPageCount( { limitPerPage } ) {
-    return Math.ceil(this.employees.length / limitPerPage);
+  getEmployeesPageCount( { limitPerPage, search } ) {
+    const filtered = filterEmployeesBySearch(this.employees, search);
+    return Math.ceil(filtered.length / limitPerPage);
   }
 
   getEmployeeById( { id } ) {
@@ -112,24 +124,20 @@ class EmployeeAPI extends RESTDataSource {
 
   getCalls( { offset, limit, search } ) {
     const startIdx = offset || 0;
-    const query = search ? search.trim().toLowerCase() : '';
     const allCalls = this.employees.reduce((calls, curEmp) => {
       return calls.concat(this.getEmployeeCalls(curEmp.id))
     }, []);
-    const filtered = allCalls.filter(call => 
-        call.caller.toLowerCase().includes(query)
-     || call.employee.toLowerCase().includes(query));
-    return filtered
+    return filterCallsBySearch(allCalls, search)
       .sort(sortByTimestampDescending)
       .slice(startIdx, startIdx + limit);
   }
 
-  getCallsPageCount( { limitPerPage }) {
-    const callQty = this.employees.reduce((prev, curEmp) => {
-      this.setSeed(curEmp.id);
-      return prev + getFakeNumCalls();
-    }, 0);
-    return Math.ceil(callQty / limitPerPage);
+  getCallsPageCount( { limitPerPage, search }) {
+    const allCalls = this.employees.reduce((calls, curEmp) => {
+      return calls.concat(this.getEmployeeCalls(curEmp.id))
+    }, []);
+    const filtered = filterCallsBySearch(allCalls, search);
+    return Math.ceil(filtered.length / limitPerPage);
   }
 }
 

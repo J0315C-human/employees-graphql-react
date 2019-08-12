@@ -4,10 +4,10 @@ const { gql } = require("apollo-server");
 const typeDefs = gql`
   type Query {
     employees(offset: Int, limit: Int, search: String): [Employee]!
-    employeesPageCount(limitPerPage: Int): Int!
+    employeesPageCount(limitPerPage: Int, search: String): Int!
     employee(id: ID!): Employee
     calls(offset: Int, limit: Int, search: String): [Call]!
-    callsPageCount(limitPerPage: Int): Int!
+    callsPageCount(limitPerPage: Int, search: String): Int!
     call(id: ID!): Call
   }
 
