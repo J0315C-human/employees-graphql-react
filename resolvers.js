@@ -8,5 +8,6 @@ module.exports = {
     calls: (parent, args, { dataSources }) => dataSources.employeeAPI.getCalls(args),
     callsPageCount: (parent, args, { dataSources }) => dataSources.employeeAPI.getCallsPageCount(args),
     call: (parent, args, { dataSources }) => dataSources.employeeAPI.getCallById(args),
+    reports: (parent, args, { dataSources }) => dataSources.employeeAPI.getReports(),
   }
 }

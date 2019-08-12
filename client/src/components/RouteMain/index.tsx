@@ -9,6 +9,7 @@ import RouteCall from '../RouteCall';
 import RouteCalls from '../RouteCalls';
 import transitionProps from '../../constants/transitionProps';
 import { getRouteDepth } from '../../utils';
+import RouteReports from '../RouteReports';
 
 const RouteMain: React.FunctionComponent<RouteComponentProps> = props => {
   const path = props.location.pathname;
@@ -35,6 +36,7 @@ const RouteMain: React.FunctionComponent<RouteComponentProps> = props => {
         <Route path="/employees" component={RouteEmployees} />
         <Route path="/calls/:callId" component={RouteCall} />
         <Route path="/calls" component={RouteCalls} />
+        <Route path="/reports" component={RouteReports} />
         <Route path="/" component={RouteHome} />
       </SwitchTransition>
     </>

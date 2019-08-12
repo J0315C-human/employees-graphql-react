@@ -99,3 +99,15 @@ export const GET_CALLS_PAGECOUNT = gql`
     callsPageCount(limitPerPage: $limitPerPage, search: $search, status: $status)
   }
 `;
+
+export const GET_REPORTS = gql`
+  query Reports {
+    reports {
+      resolutionRate
+      callsFlagged
+      avgCallLength
+      numEmployees
+      numCalls
+    }
+  }
+`;

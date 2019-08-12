@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Home from '@material-ui/icons/HomeOutlined';
 import Face from '@material-ui/icons/FaceOutlined';
 import Phone from '@material-ui/icons/PhoneOutlined';
+import Report from '@material-ui/icons/AssignmentOutlined';
 import CustomLink from '../CustomLink';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -64,6 +65,19 @@ const NavMain: React.FunctionComponent<RouteComponentProps> = props => {
             <Phone />
             <Typography variant="h6" noWrap className={styles.btnText}>
               {'Calls'}
+            </Typography>
+          </IconButton>
+        </CustomLink>
+        <CustomLink to="/reports" className={styles.link}>
+          <IconButton
+            color="inherit"
+            aria-label="open reports"
+            className={styles.navBtn}
+            disabled={path.includes('/reports')}
+          >
+            <Report />
+            <Typography variant="h6" noWrap className={styles.btnText}>
+              {'Reports'}
             </Typography>
           </IconButton>
         </CustomLink>

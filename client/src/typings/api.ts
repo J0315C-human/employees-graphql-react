@@ -37,3 +37,11 @@ export interface Call {
 export interface EmployeeWithCalls extends Employee {
   calls: Call[];
 }
+
+export interface Reports {
+  resolutionRate: number;
+  callsFlagged: number;
+  avgCallLength: number;
+  numEmployees: number;
+  numCalls: number;
+}

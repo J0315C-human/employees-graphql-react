@@ -9,6 +9,7 @@ const typeDefs = gql`
     calls(offset: Int, limit: Int, search: String, status: String): [Call]!
     callsPageCount(limitPerPage: Int, search: String, status: String): Int!
     call(id: ID!): Call
+    reports: Reports
   }
 
   type Employee {
@@ -51,6 +52,14 @@ const typeDefs = gql`
   type CallTranscriptPart {
     speaker: String!
     message: String!
+  }
+
+  type Reports {
+    avgCallLength: Int!
+    resolutionRate: Float!
+    callsFlagged: Int
+    numEmployees: Int
+    numCalls: Int
   }
 `;
 

@@ -47,6 +47,7 @@ class EmployeeAPI extends RESTDataSource {
     this.getAllEmployees = this.getAllEmployees.bind(this);
     this.getEmployeeCall = this.getEmployeeCall.bind(this);
     this.setSeed = this.setSeed.bind(this);
+    this.getAllCalls = this.getAllCalls.bind(this);
   }
 
   employeeReducer(emp) {
@@ -124,22 +125,53 @@ class EmployeeAPI extends RESTDataSource {
     return emp ? this.employeeReducer(emp) : null;
   }
 
-  getCalls( { offset, limit, search, status } ) {
-    const startIdx = offset || 0;
-    const allCalls = this.employees.reduce((calls, curEmp) => {
+  getAllCalls () {
+    return this.employees.reduce((calls, curEmp) => {
       return calls.concat(this.getEmployeeCalls(curEmp.id))
     }, []);
+  }
+
+  getCalls( { offset, limit, search, status } ) {
+    const startIdx = offset || 0;
+    const allCalls = this.getAllCalls();
     return filterCallsBySearchAndStatus(allCalls, search, status)
       .sort(sortByTimestampDescending)
       .slice(startIdx, startIdx + limit);
   }
 
   getCallsPageCount( { limitPerPage, search, status }) {
-    const allCalls = this.employees.reduce((calls, curEmp) => {
-      return calls.concat(this.getEmployeeCalls(curEmp.id))
-    }, []);
+    const allCalls = this.getAllCalls();
     const filtered = filterCallsBySearchAndStatus(allCalls, search, status);
     return Math.ceil(filtered.length / limitPerPage);
+  }
+
+  getReports() {
+    const allCalls = this.getAllCalls();
+    const {
+      callDurationTotal,
+      totalResolved,
+      totalFlagged,
+    } = allCalls.reduce((prev, cur) => {
+      if (cur.status === 'resolved'){
+        prev.totalResolved += 1;
+      } else if (cur.status === 'flagged'){
+        prev.totalFlagged += 1;
+      }
+      prev.callDurationTotal += cur.duration;
+      return prev;
+    }, {
+      callDurationTotal: 0,
+      totalResolved : 0,
+      totalFlagged: 0,
+    });
+
+    return {
+      avgCallLength: Math.round(callDurationTotal / allCalls.length),
+      resolutionRate: totalResolved / allCalls.length,
+      callsFlagged: totalFlagged,
+      numEmployees: this.employees.length,
+      numCalls: allCalls.length,
+    }
   }
 }
 
