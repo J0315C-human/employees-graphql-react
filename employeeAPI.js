@@ -10,6 +10,9 @@ const toTitleCase = (words) => {
   return parts.map((part) => part[0].toUpperCase() + part.slice(1)).join(' ');
 }
 
+/** The data returned from these methods are heavily faked with faker.js, using IDs as seed values to 
+ * maintain consistent return values and give the appearance of a "real" database.
+ */
 class EmployeeAPI extends RESTDataSource {
   constructor() {
     super();
@@ -98,6 +101,10 @@ class EmployeeAPI extends RESTDataSource {
     return filtered.slice(startIdx, startIdx + limit).map(this.employeeReducer);
   }
 
+  getEmployeesPageCount( { limitPerPage } ) {
+    return Math.ceil(this.employees.length / limitPerPage);
+  }
+
   getEmployeeById( { id } ) {
     const emp = this.employees[parseInt(id)];
     return emp ? this.employeeReducer(emp) : null;
@@ -115,6 +122,14 @@ class EmployeeAPI extends RESTDataSource {
     return filtered
       .sort(sortByTimestampDescending)
       .slice(startIdx, startIdx + limit);
+  }
+
+  getCallsPageCount( { limitPerPage }) {
+    const callQty = this.employees.reduce((prev, curEmp) => {
+      this.setSeed(curEmp.id);
+      return prev + getFakeNumCalls();
+    }, 0);
+    return Math.ceil(callQty / limitPerPage);
   }
 }
 
