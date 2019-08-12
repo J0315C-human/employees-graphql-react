@@ -12,7 +12,7 @@ import { getRouteDepth } from '../../utils';
 
 const RouteMain: React.FunctionComponent<RouteComponentProps> = props => {
   const path = props.location.pathname;
-  const prevPath = props.location.state['prevPath'] || path;
+  const prevPath = (props.location && props.location.state && props.location.state['prevPath']) || path;
   const pathDepth = getRouteDepth(path);
   const prevPathDepth = getRouteDepth(prevPath);
 

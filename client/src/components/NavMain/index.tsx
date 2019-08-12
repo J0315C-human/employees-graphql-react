@@ -4,7 +4,6 @@ import { AppBar, Toolbar, IconButton, Typography, makeStyles, Theme, createStyle
 import Home from '@material-ui/icons/HomeOutlined';
 import Face from '@material-ui/icons/FaceOutlined';
 import Phone from '@material-ui/icons/PhoneOutlined';
-import ListAlt from '@material-ui/icons/ListAltOutlined';
 import CustomLink from '../CustomLink';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -61,20 +60,6 @@ const NavMain: React.FunctionComponent<RouteComponentProps> = props => {
             <Phone />
             <Typography variant="h6" noWrap className={styles.btnText}>
               {'Calls'}
-            </Typography>
-          </IconButton>
-        </CustomLink>
-        <CustomLink to="/reports" className={styles.link}>
-          <IconButton
-            color="inherit"
-            aria-label="open reports"
-            edge="end"
-            className={styles.navBtn}
-            disabled={path.includes('/reports')}
-          >
-            <ListAlt />
-            <Typography variant="h6" noWrap className={styles.btnText}>
-              {'Reports'}
             </Typography>
           </IconButton>
         </CustomLink>

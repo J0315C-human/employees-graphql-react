@@ -6,6 +6,7 @@ import { Call } from '../../typings/api';
 import { Container, createStyles, makeStyles, Theme, Typography, Card } from '@material-ui/core';
 import styleProps from '../../constants/styleProps';
 import CallDetails from '../CallDetails';
+import ButtonBack from '../ButtonBack';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,11 +25,14 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const RouteCall: React.FunctionComponent<RouteComponentProps<{ callId: string }>> = props => {
-  const id = props.match.params.callId;
+const RouteCall: React.FunctionComponent<RouteComponentProps<{ callId: string; empId?: string }>> = props => {
+  const { match, location } = props;
+  const id = match.params.callId;
   const styles = useStyles();
+  const backTo = location.pathname.includes('employees') ? `../../../employees/${match.params.empId}` : '../calls';
   return (
     <Container style={{ ...styleProps.rowWrapCentered, ...styleProps.pageScrollBox }}>
+      <ButtonBack to={backTo} />
       <Query<{ call: Call }, GetCallVars> query={GET_CALL} variables={{ id }}>
         {({ data, loading, error }) => {
           if (loading) {

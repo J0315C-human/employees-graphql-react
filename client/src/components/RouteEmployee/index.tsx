@@ -8,13 +8,14 @@ import styleProps from '../../constants/styleProps';
 import EmployeeDetails from '../EmployeeDetails';
 import TitleSubsection from '../TitleSubsection';
 import CollectionCall from '../CollectionCall';
+import ButtonBack from '../ButtonBack';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     heroContainer: {
       width: '100%',
       overflow: 'hidden',
-      height: 220,
+      height: 300,
       position: 'relative',
     },
     hero: {
@@ -24,6 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
       top: '-5%',
       left: '-5%',
       opacity: 0.2,
+      pointerEvents: 'none',
       ...styleProps.blurredHeroImage,
     },
     headerContainer: {
@@ -74,6 +76,7 @@ const RouteEmployee: React.FunctionComponent<RouteComponentProps<{ empId: string
             return (
               <Container style={{ marginBottom: 30 }}>
                 <div className={styles.heroContainer}>
+                  <ButtonBack to="../employees" />
                   <div className={styles.hero} style={{ backgroundImage: `url(${emp.details.imageUrl})` }} />
                   <div className={styles.headerContainer}>
                     <Avatar alt="Employee Image" src={emp.details.imageUrl} className={styles.avatar} />
