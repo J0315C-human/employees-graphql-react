@@ -16,14 +16,14 @@ const transitionProps = {
     leave: { opacity: 0, transform: 'scale(1)' },
   },
   pageDeeper: {
-    from: { opacity: 0, transform: 'scale(0.87)' },
+    from: { opacity: 0, transform: 'scale(0.92)' },
     enter: { opacity: 1, transform: 'scale(1)' },
     leave: { opacity: 0, transform: 'scale(1)' },
   },
   pageShallower: {
     from: { opacity: 0, transform: 'scale(1)' },
     enter: { opacity: 1, transform: 'scale(1)' },
-    leave: { opacity: 0, transform: 'scale(0.87)' },
+    leave: { opacity: 0, transform: 'scale(0.92)' },
   },
 };
 
