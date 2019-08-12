@@ -23,7 +23,7 @@ const QueryErrorLoading: React.FunctionComponent<QueryErrorLoadingProps> = props
   } else if (props.loading) {
     return (
       <Container style={styleProps.rowWrapCentered}>
-        <Typography variant="h3" style={{ color: 'red' }}>
+        <Typography variant="h5" style={{ color: 'red' }}>
           <CircularProgress style={{ marginTop: 80 }} />
         </Typography>
       </Container>

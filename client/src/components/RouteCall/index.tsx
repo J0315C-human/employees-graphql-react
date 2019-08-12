@@ -15,7 +15,7 @@ import QueryErrorLoading from '../QueryErrorLoading';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     headerName: {
-      margin: theme.spacing(4),
+      marginBottom: theme.spacing(4),
       fontWeight: 400,
     },
     subsectionTitle: {
