@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Call } from '../../typings/api';
-import { Grid } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
 import { useTransition, animated } from 'react-spring';
 import CardCall from '../CardCall';
 import transitionProps from '../../constants/transitionProps';

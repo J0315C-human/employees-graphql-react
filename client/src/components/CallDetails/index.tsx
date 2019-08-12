@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Call } from '../../typings/api';
-import { Grid, Container } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
 import styleProps from '../../constants/styleProps';
 import TitleSubsection from '../TitleSubsection';
 import { getCallDetails } from './helpers';

@@ -4,7 +4,7 @@ import { Query } from 'react-apollo';
 import { GetCallsVars, GET_CALLS } from '../../apollo/queries';
 import { Call } from '../../typings/api';
 import InputSearch from '../InputSearch';
-import { Container } from '@material-ui/core';
+import Container from '@material-ui/core/Container';
 import styleProps from '../../constants/styleProps';
 import CollectionCall from '../CollectionCall';
 

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { EmployeeWithCalls } from '../../typings/api';
-import { Grid } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
 import styleProps from '../../constants/styleProps';
 import CardStatistic from '../CardStatistic';
 import Icon1 from '@material-ui/icons/AvTimer';

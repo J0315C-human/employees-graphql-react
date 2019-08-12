@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, Fab, Container } from '@material-ui/core';
+import { Theme } from '@material-ui/core';
+import Fab from '@material-ui/core/Fab';
+import Container from '@material-ui/core/Container';
 import Face from '@material-ui/icons/FaceOutlined';
 import Phone from '@material-ui/icons/PhoneOutlined';
 import ListAlt from '@material-ui/icons/ListAltOutlined';

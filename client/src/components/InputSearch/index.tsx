@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { TextField, InputAdornment, makeStyles, Theme, createStyles, Grid } from '@material-ui/core';
+import { makeStyles, Theme, createStyles } from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
 import SearchIcon from '@material-ui/icons/Search';
 
 interface InputSearchProps {

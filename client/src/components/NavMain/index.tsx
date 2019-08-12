@@ -1,6 +1,10 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { AppBar, Toolbar, IconButton, Typography, makeStyles, Theme, createStyles } from '@material-ui/core';
+import { makeStyles, Theme, createStyles } from '@material-ui/core';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
 import Home from '@material-ui/icons/HomeOutlined';
 import Face from '@material-ui/icons/FaceOutlined';
 import Phone from '@material-ui/icons/PhoneOutlined';

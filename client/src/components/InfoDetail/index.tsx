@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Typography, makeStyles, Theme, createStyles } from '@material-ui/core';
+import { makeStyles, Theme, createStyles } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 import styleProps from '../../constants/styleProps';
 
 interface InfoDetailProps {

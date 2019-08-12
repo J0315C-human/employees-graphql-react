@@ -1,7 +1,7 @@
 import * as React from 'react';
 import CardEmployee from '../CardEmployee';
 import { Employee } from '../../typings/api';
-import { Grid } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
 import { useTransition, animated } from 'react-spring';
 import transitionProps from '../../constants/transitionProps';
 

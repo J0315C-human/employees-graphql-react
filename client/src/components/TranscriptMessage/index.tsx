@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { Card, Typography, makeStyles, Theme, createStyles } from '@material-ui/core';
+import { makeStyles, Theme, createStyles } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
+import Card from '@material-ui/core/Card';
 
 interface TranscriptMessageProps {
   speaker: string;

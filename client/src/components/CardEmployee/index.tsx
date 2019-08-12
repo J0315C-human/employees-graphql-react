@@ -1,9 +1,7 @@
 import * as React from 'react';
 import Card from '@material-ui/core/Card';
 import { Employee } from '../../typings/api';
-import makeStyles from '@material-ui/styles/makeStyles';
-import createStyles from '@material-ui/styles/createStyles';
-import { Theme } from '@material-ui/core/styles';
+import { Theme, makeStyles, createStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import CardMedia from '@material-ui/core/CardMedia';
 import { useState } from 'react';

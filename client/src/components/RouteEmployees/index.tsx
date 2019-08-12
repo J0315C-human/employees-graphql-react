@@ -5,7 +5,7 @@ import { GET_EMPLOYEES, GetEmployeesVars } from '../../apollo/queries';
 import CollectionEmployee from '../CollectionEmployee';
 import { Employee } from '../../typings/api';
 import InputSearch from '../InputSearch';
-import { Container } from '@material-ui/core';
+import Container from '@material-ui/core/Container';
 import styleProps from '../../constants/styleProps';
 
 interface RouteEmployeesState {

@@ -1,6 +1,8 @@
 import * as React from 'react';
 import CustomLink from '../CustomLink';
-import { IconButton, Typography, makeStyles, Theme, createStyles } from '@material-ui/core';
+import { makeStyles, Theme, createStyles } from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 
 interface ButtonBackProps {
