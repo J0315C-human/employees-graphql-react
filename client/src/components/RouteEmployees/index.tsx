@@ -9,6 +9,7 @@ import Container from '@material-ui/core/Container';
 import styleProps from '../../constants/styleProps';
 import values from '../../constants/values';
 import PaginationWithQuery from '../PaginationWithQuery';
+import QueryErrorLoading from '../QueryErrorLoading';
 
 interface RouteEmployeesState {
   searchQuery: string;
@@ -52,15 +53,10 @@ export default class RouteEmployees extends React.Component<RouteComponentProps<
           variables={{ limit: values.employeesPerPage, offset, search: searchQuery }}
         >
           {({ data, loading, error }) => {
-            if (loading) {
-              return <div>LOADING...</div>;
-            }
-            if (error) {
-              return <div>{error}</div>;
-            }
             if (data && data.employees) {
               return <CollectionEmployee employees={data.employees} animateIn={animateIn} />;
-            } else return <div>NO DATA!</div>;
+            }
+            return <QueryErrorLoading error={error} loading={loading} />;
           }}
         </Query>
       </Container>

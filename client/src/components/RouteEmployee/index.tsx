@@ -13,6 +13,7 @@ import EmployeeDetails from '../EmployeeDetails';
 import TitleSubsection from '../TitleSubsection';
 import CollectionCall from '../CollectionCall';
 import ButtonBack from '../ButtonBack';
+import QueryErrorLoading from '../QueryErrorLoading';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -69,12 +70,6 @@ const RouteEmployee: React.FunctionComponent<RouteComponentProps<{ empId: string
     <Container style={{ ...styleProps.rowWrapCentered, ...styleProps.pageScrollBox }}>
       <Query<{ employee: EmployeeWithCalls }, GetEmployeeVars> query={GET_EMPLOYEE} variables={{ id }}>
         {({ data, loading, error }) => {
-          if (loading) {
-            return <div>LOADING...</div>;
-          }
-          if (error) {
-            return <div>{error}</div>;
-          }
           if (data && data.employee) {
             const emp = data.employee;
             return (
@@ -101,7 +96,7 @@ const RouteEmployee: React.FunctionComponent<RouteComponentProps<{ empId: string
                 />
               </Container>
             );
-          } else return <div>NO DATA!</div>;
+          } else return <QueryErrorLoading error={error} loading={loading} />;
         }}
       </Query>
     </Container>

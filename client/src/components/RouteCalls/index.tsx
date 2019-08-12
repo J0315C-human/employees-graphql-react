@@ -9,10 +9,9 @@ import styleProps from '../../constants/styleProps';
 import CollectionCall from '../CollectionCall';
 import values from '../../constants/values';
 import PaginationWithQuery from '../PaginationWithQuery';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
+
+import QueryErrorLoading from '../QueryErrorLoading';
+import SelectStatusFilter from '../SelectStatusFilter';
 
 interface RouteCallsState {
   searchQuery: string;
@@ -37,8 +36,9 @@ export default class RouteCalls extends React.Component<RouteComponentProps<{}>,
     if (this.state.page !== page.selected) this.setState({ page: page.selected, animateIn: false });
   };
 
-  onFilterChange = (event: React.ChangeEvent<any>) => {
-    this.setState({ statusFilter: event.target.value });
+  onFilterChange = (e: React.ChangeEvent<any>) => {
+    const val = (e && e.target && e.target.value) || '';
+    if (this.state.statusFilter !== val) this.setState({ statusFilter: val, animateIn: false });
   };
 
   public render() {
@@ -47,17 +47,8 @@ export default class RouteCalls extends React.Component<RouteComponentProps<{}>,
     return (
       <Container style={{ ...styleProps.rowWrapCentered, ...styleProps.pageScrollBox }}>
         <div style={styleProps.rowControls}>
-          <FormControl style={{ width: 170 }}>
-            <InputLabel htmlFor="filter">Filter By Status</InputLabel>
-            <Select value={statusFilter} onChange={this.onFilterChange}>
-              <MenuItem value="all">All</MenuItem>
-              <MenuItem value="flagged">Flagged</MenuItem>
-              <MenuItem value="resolved">Resolved</MenuItem>
-              <MenuItem value="unresolved">Unresolved</MenuItem>
-            </Select>
-          </FormControl>
+          <SelectStatusFilter onChange={this.onFilterChange} value={statusFilter} />
           <InputSearch onChange={this.onSearchChange} />
-
           <PaginationWithQuery
             query={GET_CALLS_PAGECOUNT}
             search={searchQuery}
@@ -72,15 +63,10 @@ export default class RouteCalls extends React.Component<RouteComponentProps<{}>,
           variables={{ limit: values.callsPerPage, offset, search: searchQuery, status: statusFilter }}
         >
           {({ data, loading, error }) => {
-            if (loading) {
-              return <div>LOADING...</div>;
-            }
-            if (error) {
-              return <div>{error}</div>;
-            }
             if (data && data.calls) {
               return <CollectionCall calls={data.calls} animateIn={animateIn} linkPrefix="calls/" />;
-            } else return <div>NO DATA!</div>;
+            }
+            return <QueryErrorLoading error={error} loading={loading} />;
           }}
         </Query>
       </Container>

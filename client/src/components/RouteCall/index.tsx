@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import styleProps from '../../constants/styleProps';
 import CallDetails from '../CallDetails';
 import ButtonBack from '../ButtonBack';
+import QueryErrorLoading from '../QueryErrorLoading';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -38,12 +39,6 @@ const RouteCall: React.FunctionComponent<RouteComponentProps<{ callId: string; e
       <ButtonBack to={backTo} />
       <Query<{ call: Call }, GetCallVars> query={GET_CALL} variables={{ id }}>
         {({ data, loading, error }) => {
-          if (loading) {
-            return <div>LOADING...</div>;
-          }
-          if (error) {
-            return <div>{error}</div>;
-          }
           if (data && data.call) {
             const { call } = data;
             return (
@@ -56,7 +51,7 @@ const RouteCall: React.FunctionComponent<RouteComponentProps<{ callId: string; e
                 </Card>
               </Container>
             );
-          } else return <div>NO DATA!</div>;
+          } else return <QueryErrorLoading error={error} loading={loading} />;
         }}
       </Query>
     </Container>
