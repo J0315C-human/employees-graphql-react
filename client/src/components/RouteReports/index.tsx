@@ -35,7 +35,6 @@ const RouteReports: React.FunctionComponent<RouteComponentProps<{ empId: string 
         {({ data, loading, error }) => {
           if (data && data.reports) {
             const reports = data.reports;
-            console.log(data);
             const avgCallLength = getDisplayDuration(reports.avgCallLength);
             const resolutionRate = `${(reports.resolutionRate * 100).toFixed(1)}%`;
             return (
