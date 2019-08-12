@@ -25,10 +25,6 @@ const callContents = `
   timestamp
   caller
   employee
-  transcript {
-    speaker
-    message
-  }
   status
 `;
 
@@ -65,6 +61,10 @@ export const GET_CALL = gql`
   query Call($id: ID!) {
     call(id: $id) {
       ${callContents}
+      transcript {
+        speaker
+        message
+      }
     }
   }
 `;
