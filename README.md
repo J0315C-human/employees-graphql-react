@@ -2,7 +2,7 @@
 This is a simple app to browse through the employee and call records of a fictional call center. The intended user would be the call center director, or a QC agent, or HR person. My main focus was 
 
 ## Setup
-Just run `npm install` from the root of the project, and then `npm start` should serve up the app at `localhost:3000`.
+Just run `npm install` from the root of the project, and then `npm start` should serve up the app at `localhost:3000`. If the `postinstall` script doesn't run for whatever reason, run `cd client` and `npm install` there too.
 
 ## Features
   - View and search a list of employees
