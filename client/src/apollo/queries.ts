@@ -74,8 +74,8 @@ export interface GetCallVars {
 }
 
 export const GET_CALLS = gql`
-  query CallList ($offset: Int, $limit: Int, $search: String) {
-    calls (offset: $offset, limit: $limit, search: $search) {
+  query CallList ($offset: Int, $limit: Int, $search: String, $status: String) {
+    calls (offset: $offset, limit: $limit, search: $search, status: $status) {
       ${callContents}
     }
   }
@@ -85,6 +85,7 @@ export interface GetCallsVars {
   offset?: number;
   limit?: number;
   search?: string;
+  status?: string;
 }
 
 export const GET_EMPLOYEES_PAGECOUNT = gql`
@@ -94,7 +95,7 @@ export const GET_EMPLOYEES_PAGECOUNT = gql`
 `;
 
 export const GET_CALLS_PAGECOUNT = gql`
-  query EmployeePages($limitPerPage: Int, $search: String) {
-    callsPageCount(limitPerPage: $limitPerPage, search: $search)
+  query EmployeePages($limitPerPage: Int, $search: String, $status: String) {
+    callsPageCount(limitPerPage: $limitPerPage, search: $search, status: $status)
   }
 `;

@@ -8,6 +8,7 @@ import styleProps from '../../constants/styleProps';
 
 interface PaginationWithQueryProps {
   query: object;
+  status?: string;
   search: string;
   limitPerPage: number;
   resultKey: string;
@@ -51,7 +52,10 @@ const useStyles = makeStyles((theme: Theme) => {
 const PaginationWithQuery: React.FunctionComponent<PaginationWithQueryProps> = props => {
   const styles = useStyles();
   return (
-    <Query<any> query={props.query} variables={{ limitPerPage: props.limitPerPage, search: props.search }}>
+    <Query<any>
+      query={props.query}
+      variables={{ limitPerPage: props.limitPerPage, search: props.search, status: props.status }}
+    >
       {({ data }) => {
         if (data && data[props.resultKey]) {
           return (

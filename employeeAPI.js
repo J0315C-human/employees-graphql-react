@@ -15,11 +15,13 @@ const filterEmployeesBySearch = (employees, search) => {
   return employees.filter(emp => emp.name.toLowerCase().includes(query))
 }
 
-const filterCallsBySearch = (calls, search) => {
+const filterCallsBySearchAndStatus = (calls, search, status) => {
   const query = search ? search.trim().toLowerCase() : '';
-  return calls.filter(call => 
-    call.caller.toLowerCase().includes(query)
- || call.employee.toLowerCase().includes(query));
+  return calls.filter(call => !status || status === 'all' || call.status === status)
+    .filter(call => 
+      call.caller.toLowerCase().includes(query)
+  || call.employee.toLowerCase().includes(query))
+  ;
 }
 
 /** The data returned from these methods are heavily faked with faker.js, using IDs as seed values to 
@@ -122,21 +124,21 @@ class EmployeeAPI extends RESTDataSource {
     return emp ? this.employeeReducer(emp) : null;
   }
 
-  getCalls( { offset, limit, search } ) {
+  getCalls( { offset, limit, search, status } ) {
     const startIdx = offset || 0;
     const allCalls = this.employees.reduce((calls, curEmp) => {
       return calls.concat(this.getEmployeeCalls(curEmp.id))
     }, []);
-    return filterCallsBySearch(allCalls, search)
+    return filterCallsBySearchAndStatus(allCalls, search, status)
       .sort(sortByTimestampDescending)
       .slice(startIdx, startIdx + limit);
   }
 
-  getCallsPageCount( { limitPerPage, search }) {
+  getCallsPageCount( { limitPerPage, search, status }) {
     const allCalls = this.employees.reduce((calls, curEmp) => {
       return calls.concat(this.getEmployeeCalls(curEmp.id))
     }, []);
-    const filtered = filterCallsBySearch(allCalls, search);
+    const filtered = filterCallsBySearchAndStatus(allCalls, search, status);
     return Math.ceil(filtered.length / limitPerPage);
   }
 }

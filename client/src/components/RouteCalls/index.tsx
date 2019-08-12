@@ -18,7 +18,7 @@ interface RouteCallsState {
   searchQuery: string;
   animateIn: boolean;
   page: number;
-  filterType: string;
+  statusFilter: string;
 }
 
 export default class RouteCalls extends React.Component<RouteComponentProps<{}>, RouteCallsState> {
@@ -26,7 +26,7 @@ export default class RouteCalls extends React.Component<RouteComponentProps<{}>,
     searchQuery: '',
     animateIn: true,
     page: 0,
-    filterType: '',
+    statusFilter: 'all',
   };
 
   onSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,18 +38,19 @@ export default class RouteCalls extends React.Component<RouteComponentProps<{}>,
   };
 
   onFilterChange = (event: React.ChangeEvent<any>) => {
-    this.setState({ filterType: event.target.value });
+    this.setState({ statusFilter: event.target.value });
   };
 
   public render() {
-    const { searchQuery, animateIn, page, filterType } = this.state;
+    const { searchQuery, animateIn, page, statusFilter } = this.state;
     const offset = page * values.callsPerPage;
     return (
       <Container style={{ ...styleProps.rowWrapCentered, ...styleProps.pageScrollBox }}>
         <div style={styleProps.rowControls}>
           <FormControl style={{ width: 170 }}>
-            <InputLabel htmlFor="filter">Filter By Type</InputLabel>
-            <Select value={filterType} onChange={this.onFilterChange}>
+            <InputLabel htmlFor="filter">Filter By Status</InputLabel>
+            <Select value={statusFilter} onChange={this.onFilterChange}>
+              <MenuItem value="all">All</MenuItem>
               <MenuItem value="flagged">Flagged</MenuItem>
               <MenuItem value="resolved">Resolved</MenuItem>
               <MenuItem value="unresolved">Unresolved</MenuItem>
@@ -60,6 +61,7 @@ export default class RouteCalls extends React.Component<RouteComponentProps<{}>,
           <PaginationWithQuery
             query={GET_CALLS_PAGECOUNT}
             search={searchQuery}
+            status={statusFilter}
             resultKey="callsPageCount"
             limitPerPage={values.callsPerPage}
             onPageChange={this.onChangePage}
@@ -67,7 +69,7 @@ export default class RouteCalls extends React.Component<RouteComponentProps<{}>,
         </div>
         <Query<{ calls: Call[] }, GetCallsVars>
           query={GET_CALLS}
-          variables={{ limit: values.callsPerPage, offset, search: searchQuery }}
+          variables={{ limit: values.callsPerPage, offset, search: searchQuery, status: statusFilter }}
         >
           {({ data, loading, error }) => {
             if (loading) {

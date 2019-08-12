@@ -6,8 +6,8 @@ const typeDefs = gql`
     employees(offset: Int, limit: Int, search: String): [Employee]!
     employeesPageCount(limitPerPage: Int, search: String): Int!
     employee(id: ID!): Employee
-    calls(offset: Int, limit: Int, search: String): [Call]!
-    callsPageCount(limitPerPage: Int, search: String): Int!
+    calls(offset: Int, limit: Int, search: String, status: String): [Call]!
+    callsPageCount(limitPerPage: Int, search: String, status: String): Int!
     call(id: ID!): Call
   }
 
