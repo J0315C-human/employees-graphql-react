@@ -37,14 +37,16 @@ export default class RouteEmployees extends React.Component<RouteComponentProps<
 
     return (
       <Container style={{ ...styleProps.rowWrapCentered, ...styleProps.pageScrollBox }}>
-        <InputSearch onChange={this.onSearchChange} />
-        <PaginationWithQuery
-          query={GET_EMPLOYEES_PAGECOUNT}
-          search={searchQuery}
-          resultKey="employeesPageCount"
-          limitPerPage={values.employeesPerPage}
-          onPageChange={this.onChangePage}
-        />
+        <div style={styleProps.rowControls}>
+          <InputSearch onChange={this.onSearchChange} />
+          <PaginationWithQuery
+            query={GET_EMPLOYEES_PAGECOUNT}
+            search={searchQuery}
+            resultKey="employeesPageCount"
+            limitPerPage={values.employeesPerPage}
+            onPageChange={this.onChangePage}
+          />
+        </div>
         <Query<{ employees: Employee[] }, GetEmployeesVars>
           query={GET_EMPLOYEES}
           variables={{ limit: values.employeesPerPage, offset, search: searchQuery }}

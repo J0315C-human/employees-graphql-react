@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme: Theme) => {
   return createStyles({
     container: {
       ...styleProps.rowWrapCentered,
+      padding: 0,
     },
     page: {
       ...pageStyle,

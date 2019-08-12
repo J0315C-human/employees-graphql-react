@@ -24,6 +24,13 @@ const styleProps = {
     paddingTop: 75,
     paddingBottom: 75,
   },
+  rowControls: {
+    width: '90%',
+    display: 'flex',
+    flexFlow: 'row wrap',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
 };
 
 export default styleProps;
